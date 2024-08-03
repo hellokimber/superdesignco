@@ -1,9 +1,7 @@
-body {
+body { 
     background-color: #F9EC31;
     color: #050505;
 }
-
-
 
 .portfolio-grid {
     display: grid;
