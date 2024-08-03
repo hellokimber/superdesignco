@@ -12,7 +12,8 @@ header {
 }
 
 .logo img {
-    max-height: 50px;
+    width: 6em;
+    height: auto;
 }
 
 nav ul {
