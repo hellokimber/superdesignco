@@ -1,0 +1,87 @@
+/* Font installs */
+@font-face {
+    font-family: 'GT Walsheim Pro';
+    src: 
+      url(assets/fonts/GTWalsheimPro-Light.woff2) format('woff2'),  
+      url(assets/fonts/GTWalsheimPro-Light.woff) format('woff');
+    font-weight: 300; /* light */
+  }
+ 
+  @font-face {
+    font-family: 'GT Walsheim Pro';
+    src: 
+      url(assets/fonts/GTWalsheimPro-Regular.woff2) format('woff2'), 
+      url(assets/fonts/GTWalsheimPro-Regular.woff) format('woff');
+    font-weight: 400; /* regular */
+  }
+
+  @font-face {
+    font-family: 'GT Walsheim Pro';
+    src: 
+      url(assets/fonts/GTWalsheimPro-Bold.woff2) format('woff2'),
+      url(assets/fonts/GTWalsheimPro-Bold.woff) format('woff');
+    font-weight: 700; /* bold */
+  }
+
+body {
+  font-family: 'GT Walsheim Pro', sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+/* Body text */
+.body-s-light {
+    font-weight: 300;
+    font-size: 0.5em;
+  }
+
+  .body-s-regular {
+    font-weight: 400;
+    font-size: 0.5em;
+  }
+
+  .body-s-bold {
+    font-weight: 700;
+    font-size: 0.5em;
+  }
+
+  .body-m-light {
+    font-weight: 300;
+    font-size: 1em;
+  }
+
+  .body-m-regular {
+    font-weight: 400;
+    font-size: 1em;
+  }
+
+  .body-m-bold {
+    font-weight: 700;
+    font-size: 1em;
+  }
+
+  .body-l-light {
+    font-weight: 300;
+    font-size: 1.5em;
+  }
+
+  .body-l-regular {
+    font-weight: 400;
+    font-size: 1.5em;
+  }
+
+  .body-l-bold {
+    font-weight: 700;
+    font-size: 1.5em;
+  }
+
+  .hero-text {
+    font-weight: 700;
+    font-size: 3em;
+    line-height: 1em;
+    text-transform: lowercase;
+    letter-spacing: -0.03em;
+  }
+
+
