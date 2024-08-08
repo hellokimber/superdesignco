@@ -2,24 +2,24 @@
 @font-face {
     font-family: 'GT Walsheim Pro';
     src: 
-      url(assets/fonts/GTWalsheimPro-Light.woff2) format('woff2'),  
-      url(assets/fonts/GTWalsheimPro-Light.woff) format('woff');
+      url('../assets/fonts/GTWalsheimPro-Light.woff2') format('woff2'),  
+      url('../assets/fonts/GTWalsheimPro-Light.woff') format('woff');
     font-weight: 300; /* light */
   }
  
   @font-face {
     font-family: 'GT Walsheim Pro';
     src: 
-      url(assets/fonts/GTWalsheimPro-Regular.woff2) format('woff2'), 
-      url(assets/fonts/GTWalsheimPro-Regular.woff) format('woff');
+      url('../assets/fonts/GTWalsheimPro-Regular.woff2') format('woff2'), 
+      url('../assets/fonts/GTWalsheimPro-Regular.woff') format('woff');
     font-weight: 400; /* regular */
   }
 
   @font-face {
     font-family: 'GT Walsheim Pro';
     src: 
-      url(assets/fonts/GTWalsheimPro-Bold.woff2) format('woff2'),
-      url(assets/fonts/GTWalsheimPro-Bold.woff) format('woff');
+      url('../assets/fonts/GTWalsheimPro-Bold.woff2') format('woff2'),
+      url('../assets/fonts/GTWalsheimPro-Bold.woff') format('woff');
     font-weight: 700; /* bold */
   }
 
@@ -28,6 +28,15 @@ body {
   font-size: 48px;
   font-weight: 400;
   line-height: 1.25;
+}
+
+/* Hero text */
+.hero-text {
+  font-weight: 700;
+  font-size: 3em;
+  line-height: 1em;
+  text-transform: lowercase;
+  letter-spacing: -0.03em;
 }
 
 /* Body text */
@@ -75,13 +84,3 @@ body {
     font-weight: 700;
     font-size: 1.5em;
   }
-
-  .hero-text {
-    font-weight: 700;
-    font-size: 3em;
-    line-height: 1em;
-    text-transform: lowercase;
-    letter-spacing: -0.03em;
-  }
-
-
