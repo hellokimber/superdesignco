@@ -1,7 +1,7 @@
 body { 
-    background-color: #F9EC31;
     color: #050505;
-    margin: auto 1em auto 1em;
+    margin: 0;
+    padding: auto 1em auto 1em;
 }
 
 header {
@@ -9,6 +9,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    height: fit-content;
 }
 
 .logo img {
@@ -29,6 +30,14 @@ nav ul li a {
     text-decoration: none;
     color: #333;
 }
+nav ul li a.footerNav {
+    text-decoration: none;
+    color: red ;
+}
+
+.hero {
+    background-color: #F9EC31;
+}
 
 .portfolio-grid {
     display: grid;
@@ -45,6 +54,20 @@ nav ul li a {
     width: 100%;
     height: auto;
     display: block;
+}
+
+.footerNav {
+   background-color: #050505;;   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 1em 4em 1em;
+  
+}
+
+.footerLogo img {
+    width: 3em;
+    height: auto;
 }
 
 /* Add media query for responsiveness */

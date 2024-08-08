@@ -84,3 +84,15 @@ body {
     font-weight: 700;
     font-size: 1.5em;
   }
+
+  /* Footer text */
+  .footerNav a {
+    font-weight: 300;
+    color: #fff;
+  }
+
+  .footerText p {
+    font-weight: 300;
+    font-size: 0.5em;
+    color: #fff;
+  }
