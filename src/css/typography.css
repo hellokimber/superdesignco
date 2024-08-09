@@ -38,6 +38,8 @@ body {
   line-height: 1em;
   text-transform: lowercase;
   letter-spacing: -0.03em;
+  margin: 0;
+  padding: 0;
 }
 
 /* Body text */

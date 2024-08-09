@@ -4,12 +4,12 @@ body {
     padding: auto 1em auto 1em;
 }
 
-header {
+header, .site-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    height: fit-content;
+    height: 80px;
 }
 
 .logo img {
@@ -20,6 +20,7 @@ header {
 nav ul {
     display: flex;
     list-style-type: none;
+
 }
 
 nav ul li {
@@ -30,13 +31,11 @@ nav ul li a {
     text-decoration: none;
     color: #333;
 }
-nav ul li a.footerNav {
-    text-decoration: none;
-    color: red ;
-}
+
 
 .hero {
     background-color: #F9EC31;
+    padding: 2em 2em 4em 2em;
 }
 
 .portfolio-grid {
