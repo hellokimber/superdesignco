@@ -4,7 +4,7 @@ body {
     padding: auto 1em auto 1em;
 }
 
-header, .siteHeader {
+header, .site-header {
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -2,7 +2,7 @@
 const Header = () => {
   // HTML template for the header section
   const headerHTML = `
-    
+    <div class="site-header">
       <div class="logo">
         <img src="src/assets/super-logo/SuperDesCo_colour_transparent-bg.svg" alt="The Super Design Company logo" />
       </div>
@@ -13,7 +13,7 @@ const Header = () => {
           <li class="body-s-light"><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-    
+    </div>
   `
 
   // Create a header element and set its inner HTML to the template HTML
