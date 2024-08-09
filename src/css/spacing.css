@@ -1,0 +1,34 @@
+/* vertical spacing */
+.vertical-spacing-xs {
+  margin: 0.5em 0;
+}
+
+.vertical-spacing-sm {
+  margin: 1em 0;
+}
+
+.vertical-spacing-md {
+  margin: 2em 0;
+}
+
+.vertical-spacing-lg {
+  margin: 3em 0;
+}
+
+/* horizontal spacing */
+
+.horizontal-spacing-xs {
+    margin: 0 0.5em;
+  }
+  
+.horizontal-spacing-sm {
+    margin: 0 1em;
+  }
+  
+.horizontal-spacing-md {
+    margin: 0 2em;
+  }
+  
+.horizontal-spacing-lg {
+    margin: 0 3em;
+  }

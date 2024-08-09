@@ -3,7 +3,7 @@ const Footer = () => {
     // HTML template for the footer section
     const footerHTML = `
       
-        <div class="logo">
+        <div class="footerLogo">
           <img src="src/assets/super-logo/Super-white-colour.svg" alt="The Super Design Company logo" />
         </div>
         <nav>
