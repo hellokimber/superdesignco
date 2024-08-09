@@ -1,14 +1,10 @@
-// Function to dynamically load a script
-function loadScript(url, callback) {
-    const script = document.createElement('script');
-    script.src = url;
-    script.onload = callback;
-    document.head.appendChild(script);
-}
 
-// Wait for the DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', () => {
-    // Load the header script first
-    loadScript('src/js/header.js', () => {});
-    loadScript('src/js/footer.js', () => {});
-});
+import Header from "../components/Header.js"
+
+document.addEventListener("DOMContentLoaded", function () {
+  // event listener used so that Header() runs after the DOM has loaded
+  const headerElement = document.querySelector("header")
+  const headerContent = Header() // Check if Header() (Header.js) returns the expected content
+  // console.log(headerContent) // Log the header content to verify it works
+  headerElement.appendChild(headerContent) // Append the header content to the header element in index.html
+})
