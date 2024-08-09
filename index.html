@@ -1,33 +1,31 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="/src/css/main.css">
-        <link rel="stylesheet" href="/src/css/typography.css">
+  <head>
+    <!-- Use type="module" so can import Header.js as an ES6 module -->
+    <script src="./src/components/Header.js" type="module"></script>
+    <script src="./src/js/main.js" type="module"></script>
+    <link rel="stylesheet" href="./src/css/main.css" />
+    <link rel="stylesheet" href="./src/css/typography.css" />
+  </head>
 
-    </head>
+  <body>
+    <!-- Used by Header.js -->
+    <header></header>
 
-    <body>
+    <section>
+      <p class="hero-text">Super design for super people.</p>
+      <p class="body-sm-light">where artistry meets strategy.</p>
+    </section>
 
-        <section>
-            <p class="hero-text">Super design for super people.</p>
-            <p class="body-sm-light">where artistry meets strategy.</p>
-        </section>
+    <section class="portfolio-grid">
+      <div class="portfolio-item">
+        <img src="image1.jpg" alt="Image 1" href="./pages/project1.html" />
+      </div>
+      <div class="portfolio-item">
+        <img src="image2.jpg" alt="Image 2" href="./pages/project2.html" />
+      </div>
+    </section>
 
-        <section class="portfolio-grid">
-            <div class="portfolio-item">
-                <img src="image1.jpg" alt="Image 1" href="work/project1.html">
-            </div>
-            <div class="portfolio-item">
-                <img src="image2.jpg" alt="Image 2" href="work/project2.html">
-            </div>
-            <!-- Add more portfolio items as needed -->
-        </section>
-
-        <footer>
-        
-        </footer>
-
-        <script src="src/js/main.js"></script>
-    </body>
-
+    <footer></footer>
+  </body>
 </html>
