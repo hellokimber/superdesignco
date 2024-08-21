@@ -6,13 +6,8 @@ const Header = () => {
       <div class="logo">
         <img src="src/assets/super-logo/SuperDesCo_colour_transparent-bg.svg" alt="The Super Design Company logo" />
       </div>
-      <nav>
-        <ul>
-          <li class="body-s-light"><a href="portfolio.html">Work</a></li>
-          <li class="body-s-light"><a href="about.html">About</a></li>
-          <li class="body-s-light"><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
+   
+
     </div>
   `
 
@@ -26,3 +21,12 @@ const Header = () => {
 
 // Export the Header component so it can be imported in other files as an ES6 module
 export default Header
+
+// navigation links removed until pages are created, place between logo div and closing div
+// <nav>
+// <ul>
+//   <li class="body-s-light"><a href="portfolio.html">Work</a></li>
+//   <li class="body-s-light"><a href="about.html">About</a></li>
+//  <li class="body-s-light"><a href="contact.html">Contact</a></li>
+// </ul>
+// </nav>
