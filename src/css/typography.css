@@ -79,6 +79,17 @@ body {
 }
 
 
+a {
+  color: #333;
+  text-decoration: none;
+  border-bottom: 2px solid #333;
+}
+
+a:hover {
+  color: #333;
+  border-bottom: 2px solid #fff;
+}
+
   /* Footer text */
   .footerNav a {
     font-weight: 300;

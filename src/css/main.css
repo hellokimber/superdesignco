@@ -35,7 +35,15 @@ nav ul li a {
 
 .hero {
     background-color: #F9EC31;
-    padding: 2em 2em 4em 2em;
+    padding: 2em;
+}
+
+.decorative-line-short {
+    width: 50px;
+    height: 2px;
+    background-color: #000; /* Or any color you prefer */
+    border: none;
+    margin: 20px 0; /* Adjust spacing as needed */
 }
 
 .portfolio-grid {
