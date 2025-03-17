@@ -9,7 +9,7 @@ const Footer = () => {
     
       
           <div class="footerText">
-        <p class="body-s-light">© 2024 The Super Design Company</p>
+        <p class="body-s-light">© 2025 The Super Design Company</p>
         </div>
 
     `
