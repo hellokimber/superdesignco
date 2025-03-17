@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Use type="module" so can import Header.js as an ES6 module -->
+    <!-- Use type="module" so can import Header.js and Footer.js as ES6 modules -->
     <script src="./src/components/Header.js" type="module"></script>
+    <script src="./src/components/Footer.js" type="module"></script>
     <script src="./src/js/main.js" type="module"></script>
     <link rel="stylesheet" href="./src/css/main.css" />
     <link rel="stylesheet" href="./src/css/typography.css" />
@@ -13,19 +14,19 @@
     <!-- Used by Header.js -->
     <header></header>
     
-  <section class="hero">
-           <div> <p class="hero-text">Super design for everyday heroes.</p>
-            <p class="body-m-light vertical-spacing-md">illustration and design to make your brand legendary.</p>
-          </div>
+    <section class="hero">
+      <div>
+        <p class="hero-text">Super design for everyday heroes.</p>
+        <p class="body-m-light vertical-spacing-md">illustration and design to make your brand legendary.</p>
+      </div>
 
-          <div class="vertical-spacing-xl">
-            <hr class="decorative-line-short"></div>
-            <p class="body-s-regular">
-              See some of my recent design + illustration work on <a href="https://www.instagram.com/thesuperdesigncompany">Instagram</a>
-            </p>
-          </div>
-        
-          </section>
+      <div class="vertical-spacing-xl">
+        <hr class="decorative-line-short">
+        <p class="body-s-regular">
+          See some of my recent design + illustration work on <a href="https://www.instagram.com/thesuperdesigncompany">Instagram</a>
+        </p>
+      </div>
+    </section>
 
     <!-- <section class="portfolio-grid">
       <div class="portfolio-item">
@@ -36,6 +37,7 @@
       </div>
     </section> -->
 
+    <!-- Remove the class since the Footer component will handle the styling -->
     <footer class="footerNav"></footer>
   </body>
 </html>
