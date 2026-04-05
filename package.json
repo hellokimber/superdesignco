@@ -1,4 +1,10 @@
 {
+  "scripts": {
+    "dev": "npm run dev --prefix super-frontend",
+    "build": "npm run build --prefix super-frontend",
+    "preview": "npm run preview --prefix super-frontend",
+    "lint": "npm run lint --prefix super-frontend"
+  },
   "devDependencies": {
     "@biomejs/biome": "1.8.3"
   }
