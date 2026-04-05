@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'GT Walsheim Pro';
+    src:
+      url('./assets/fonts/GTWalsheimPro-Light.woff2') format('woff2'),
+      url('./assets/fonts/GTWalsheimPro-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'GT Walsheim Pro';
+    src:
+      url('./assets/fonts/GTWalsheimPro-Regular.woff2') format('woff2'),
+      url('./assets/fonts/GTWalsheimPro-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'GT Walsheim Pro';
+    src:
+      url('./assets/fonts/GTWalsheimPro-Bold.woff2') format('woff2'),
+      url('./assets/fonts/GTWalsheimPro-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Young Serif';
+    src:
+      url('./assets/fonts/YoungSerifVF.woff2') format('woff2-variations'),
+      url('./assets/fonts/YoungSerifVF.woff') format('woff-variations');
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  body {
+    @apply m-0 antialiased;
+    font-family: 'GT Walsheim Pro', system-ui, sans-serif;
+  }
+}
+
+/* Homepage mosaic: flex row of columns; JS shortest-column pack (4 lanes = 12÷3 at lg+). */
+@layer components {
+  .home-mosaic {
+    @apply flex w-full flex-row items-start gap-3 md:gap-4;
+  }
+
+  .home-mosaic__col {
+    @apply flex flex-col gap-3 md:gap-4;
+  }
+
+  .home-mosaic__figure {
+    @apply m-0 min-h-0 w-full bg-transparent;
+    position: relative;
+  }
+
+  .home-mosaic__media {
+    @apply h-auto w-full max-w-full object-contain transition-transform duration-300 ease-out;
+    display: block;
+  }
+
+  .home-mosaic__figure:hover .home-mosaic__media {
+    transform: scale(1.02);
+  }
+}
