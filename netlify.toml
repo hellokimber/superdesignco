@@ -1,0 +1,9 @@
+[build]
+  command = "npm ci --prefix super-frontend && npm run build --prefix super-frontend"
+  publish = "super-frontend/dist"
+
+# Single-page app (React Router): serve index.html for all paths
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
