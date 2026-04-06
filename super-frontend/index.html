@@ -2,7 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/Super-Emblem-black.svg"
+      id="favicon"
+    />
+    <script>
+      (function () {
+        var link = document.getElementById('favicon');
+        var light = '/Super-Emblem-black.svg';
+        var dark = '/Super-Emblem-white.svg';
+        function apply() {
+          link.href = window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? dark
+            : light;
+        }
+        apply();
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
+        if (mq.addEventListener) mq.addEventListener('change', apply);
+        else mq.addListener(apply);
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
