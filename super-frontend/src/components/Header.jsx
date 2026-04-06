@@ -7,7 +7,7 @@ const contactHref = () => {
     const q = new URLSearchParams({ subject: 'Let’s work together' })
     return `mailto:${email}?${q}`
   }
-  return 'mailto:hello@thesuperdesign.co?subject=Let%E2%80%99s%20work%20together'
+  return 'mailto:hello@superdesigncompany.com?subject=Let%E2%80%99s%20work%20together'
 }
 
 export default function Header() {
