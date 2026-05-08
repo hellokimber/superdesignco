@@ -6,7 +6,8 @@ import imgT5 from '../assets/imgs/SuperDesign_product_helmet1.webp'
 import imgT6 from '../assets/imgs/SuperDesign_woman-studioshot.webp'
 import imgT7 from '../assets/imgs/SuperDesign_Vibe-beach.webp'
 import imgT9 from '../assets/imgs/SuperDesign_specad_cartier.webp'
-import imgT11 from '../assets/imgs/SuperDesign_blueheadshot.webp'
+import imgT11 from '../assets/imgs/SuperDesign_Woman-WilliamMorris.webp'
+import imgT17 from '../assets/imgs/SuperDesign_blueheadshot.webp'
 import imgT12 from '../assets/imgs/SuperDesign_woman-in-apt.webp'
 import imgT13 from '../assets/imgs/SuperDesignGM.webp'
 import imgT14 from '../assets/imgs/SuperDesign_product_pebbles2.webp'
@@ -96,9 +97,9 @@ export const HOME_GRID = [
   {
     area: 't11',
     src: imgT11,
-    alt: 'Blue-toned headshot portrait',
-    width: 1792,
-    height: 2400,
+    alt: 'Portrait with William Morris floral backdrop',
+    width: 1904,
+    height: 2544,
   },
   {
     area: 't7',
@@ -113,5 +114,12 @@ export const HOME_GRID = [
     alt: 'Portrait with sunglasses and red styling',
     width: 928,
     height: 1232,
+  },
+  {
+    area: 't17',
+    src: imgT17,
+    alt: 'Blue-toned headshot portrait',
+    width: 1792,
+    height: 2400,
   },
 ]
