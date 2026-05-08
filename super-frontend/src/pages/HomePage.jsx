@@ -1,6 +1,8 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { HOME_GRID } from '../data/homeGrid.js'
 
+const HOME_MOSAIC_HERO_AREA = 't2'
+
 /** 4 visual lanes at lg+ (12-col system: each lane = 3 tracks). */
 function columnCountForWidth(widthPx) {
   if (widthPx < 768) return 1
@@ -19,7 +21,28 @@ function packMasonry(items, containerWidthPx, gapPx, colCount) {
   const totalGap = gapPx * (n - 1)
   const colWidth = Math.max(0, (containerWidthPx - totalGap) / n)
   const cols = Array.from({ length: n }, () => ({ list: [], height: 0 }))
-  for (const item of items) {
+  let pendingItems = items
+
+  // Keep the Cairn landscape inside masonry: pin it top-left and span two lanes at lg+.
+  if (n >= 4) {
+    const hero = items.find((item) => item.area === HOME_MOSAIC_HERO_AREA)
+    if (hero) {
+      const heroAspect = hero.height / hero.width
+      const heroVisibleHeight = (colWidth * 2 + gapPx) * heroAspect
+      const heroTileH = heroVisibleHeight + gapPx
+      cols[0].list.push({ ...hero, isSpanTwo: true })
+      cols[0].height += heroTileH
+      cols[1].list.push({
+        area: `${hero.area}__spacer`,
+        isSpacer: true,
+        spacerHeight: heroVisibleHeight,
+      })
+      cols[1].height += heroTileH
+      pendingItems = items.filter((item) => item.area !== HOME_MOSAIC_HERO_AREA)
+    }
+  }
+
+  for (const item of pendingItems) {
     let shortest = cols[0]
     for (let i = 1; i < cols.length; i++) {
       if (cols[i].height < shortest.height) shortest = cols[i]
@@ -57,6 +80,16 @@ function sizesForColumnCount(colCount) {
   return '(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1023px) calc(50vw - 2.5rem), calc((100vw - 4rem - 3rem) / 4)'
 }
 
+function sizesForHero(colCount) {
+  if (colCount <= 1) {
+    return '(max-width: 767px) calc(100vw - 2.5rem), calc(100vw - 2.5rem)'
+  }
+  if (colCount === 2) {
+    return '(max-width: 767px) calc(100vw - 2.5rem), calc(100vw - 2.5rem)'
+  }
+  return '(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1023px) calc(100vw - 2.5rem), calc(50vw - 3.5rem)'
+}
+
 export default function HomePage() {
   const rootRef = useRef(null)
   const [{ columns, colCount }, setLayout] = useState(initialPackedColumns)
@@ -88,6 +121,7 @@ export default function HomePage() {
   }, [])
 
   const sizes = sizesForColumnCount(colCount)
+  const sizesHero = sizesForHero(colCount)
 
   return (
     <div className="px-5 pb-16 pt-6 md:px-8 md:pb-20 md:pt-8">
@@ -112,24 +146,36 @@ export default function HomePage() {
             className="home-mosaic__col min-w-0 flex-1"
             data-col={colIndex + 1}
           >
-            {colItems.map(({ area, src, alt, width, height }) => {
-              const isLcp = area === 't1'
+            {colItems.map((item) => {
+              if (item.isSpacer) {
+                return (
+                  <figure
+                    key={item.area}
+                    aria-hidden="true"
+                    className="home-mosaic__figure home-mosaic__spacer"
+                    style={{ height: `${item.spacerHeight}px` }}
+                  />
+                )
+              }
+
+              const { area, src, alt, width, height, isSpanTwo } = item
               const globalIndex = HOME_GRID.findIndex((g) => g.area === area) + 1
+              const isHero = area === HOME_MOSAIC_HERO_AREA
               return (
                 <figure
                   key={area}
                   data-area={area}
-                  className="home-mosaic__figure"
+                  className={`home-mosaic__figure${isSpanTwo ? ' home-mosaic__figure--span-2' : ''}`}
                 >
                   <img
                     src={src}
                     alt={alt}
                     width={width}
                     height={height}
-                    sizes={sizes}
-                    loading={isLcp ? 'eager' : 'lazy'}
-                    decoding={isLcp ? 'sync' : 'async'}
-                    {...(isLcp ? { fetchPriority: 'high' } : {})}
+                    sizes={isHero ? sizesHero : sizes}
+                    loading={isHero ? 'eager' : 'lazy'}
+                    decoding={isHero ? 'sync' : 'async'}
+                    {...(isHero ? { fetchPriority: 'high' } : {})}
                     className="home-mosaic__media"
                   />
                   <figcaption className="sr-only">
