@@ -13,8 +13,11 @@ import imgT13 from '../assets/imgs/SuperDesignGM.webp'
 import imgT14 from '../assets/imgs/SuperDesign_product_pebbles2.webp'
 import imgT15 from '../assets/imgs/SuperDesign_product_pebbles1.webp'
 import imgT16 from '../assets/imgs/SuperDesign_peaceofmind.webp'
+import imgT18 from '../assets/imgs/SuperDesign_DelftEditorial1.jpg'
+import imgT19 from '../assets/imgs/SuperDesign_DelftEditorial2.jpg'
+import imgT20 from '../assets/imgs/SuperDesign_charactersfront.jpg'
 
-/** `data-area` ids for figures. `t2` is pinned full-width (tablet) / two-column (desktop) at top of mosaic. */
+/** `data-area` ids for figures. `t2` spans two columns top-left; `t20` spans two columns under the top-right pair. */
 export const HOME_GRID = [
   {
     area: 't2',
@@ -53,6 +56,13 @@ export const HOME_GRID = [
     height: 1264,
   },
   {
+    area: 't18',
+    src: imgT18,
+    alt: 'Woman in a blue-and-white Delft headscarf and dark coat on patterned tile',
+    width: 1024,
+    height: 824,
+  },
+  {
     area: 't13',
     src: imgT13,
     alt: 'Studio portrait against dark backdrop',
@@ -88,6 +98,13 @@ export const HOME_GRID = [
     height: 1137,
   },
   {
+    area: 't19',
+    src: imgT19,
+    alt: 'Close-up portrait with a Delft-patterned headscarf against blue',
+    width: 1024,
+    height: 764,
+  },
+  {
     area: 't14',
     src: imgT14,
     alt: 'Product still life with pebbles',
@@ -114,6 +131,13 @@ export const HOME_GRID = [
     alt: 'Portrait with sunglasses and red styling',
     width: 928,
     height: 1232,
+  },
+  {
+    area: 't20',
+    src: imgT20,
+    alt: 'Lineup of five fashion-styled mouse characters',
+    width: 1024,
+    height: 573,
   },
   {
     area: 't17',

@@ -4,12 +4,55 @@ import heroLandscape from '../assets/imgs/SuperDesign_about-streaks.jpg'
 import { HOME_GRID } from '../data/homeGrid.js'
 
 const HOME_MOSAIC_HERO_AREA = 't2'
+const HOME_MOSAIC_CHARACTERS_AREA = 't20'
 
 /** 4 visual lanes at lg+ (12-col system: each lane = 3 tracks). */
 function columnCountForWidth(widthPx) {
   if (widthPx < 768) return 1
   if (widthPx < 1024) return 2
   return 4
+}
+
+function pinSpanTwo(cols, item, startCol, colWidth, gapPx) {
+  const endCol = startCol + 1
+  const aspect = item.height / item.width
+  const visibleHeight = (colWidth * 2 + gapPx) * aspect
+  const tileH = visibleHeight + gapPx
+  const y = Math.max(cols[startCol].height, cols[endCol].height)
+
+  for (const c of [startCol, endCol]) {
+    const delta = y - cols[c].height
+    const spacerHeight = delta - gapPx
+    // Zero-height spacers still consume a flex-gap, doubling the gutter.
+    if (spacerHeight > 1) {
+      cols[c].list.push({
+        area: `${item.area}__align-${c}`,
+        isSpacer: true,
+        spacerHeight,
+      })
+      cols[c].height = y
+    }
+  }
+
+  cols[startCol].list.push({ ...item, isSpanTwo: true })
+  cols[startCol].height += tileH
+  cols[endCol].list.push({
+    area: `${item.area}__spacer`,
+    isSpacer: true,
+    spacerHeight: visibleHeight,
+  })
+  cols[endCol].height += tileH
+}
+
+function packItem(cols, item, colWidth, gapPx) {
+  let shortest = cols[0]
+  for (let i = 1; i < cols.length; i++) {
+    if (cols[i].height < shortest.height) shortest = cols[i]
+  }
+  const aspect = item.height / item.width
+  const tileH = colWidth * aspect + gapPx
+  shortest.list.push(item)
+  shortest.height += tileH
 }
 
 function packMasonry(items, containerWidthPx, gapPx, colCount) {
@@ -25,35 +68,54 @@ function packMasonry(items, containerWidthPx, gapPx, colCount) {
   const cols = Array.from({ length: n }, () => ({ list: [], height: 0 }))
   let pendingItems = items
 
-  // Keep the Cairn landscape inside masonry: pin it top-left and span two lanes at lg+.
+  // Cairn landscape top-left (2 lanes). Fill the two right lanes with one
+  // image each, then pin the character lineup across those lanes underneath.
   if (n >= 4) {
     const hero = items.find((item) => item.area === HOME_MOSAIC_HERO_AREA)
     if (hero) {
-      const heroAspect = hero.height / hero.width
-      const heroVisibleHeight = (colWidth * 2 + gapPx) * heroAspect
-      const heroTileH = heroVisibleHeight + gapPx
-      cols[0].list.push({ ...hero, isSpanTwo: true })
-      cols[0].height += heroTileH
-      cols[1].list.push({
-        area: `${hero.area}__spacer`,
-        isSpacer: true,
-        spacerHeight: heroVisibleHeight,
-      })
-      cols[1].height += heroTileH
-      pendingItems = items.filter((item) => item.area !== HOME_MOSAIC_HERO_AREA)
+      pinSpanTwo(cols, hero, 0, colWidth, gapPx)
+      pendingItems = pendingItems.filter(
+        (item) => item.area !== HOME_MOSAIC_HERO_AREA,
+      )
     }
   }
 
-  for (const item of pendingItems) {
-    let shortest = cols[0]
-    for (let i = 1; i < cols.length; i++) {
-      if (cols[i].height < shortest.height) shortest = cols[i]
+  const characters = pendingItems.find(
+    (item) => item.area === HOME_MOSAIC_CHARACTERS_AREA,
+  )
+  const rest = pendingItems.filter(
+    (item) => item.area !== HOME_MOSAIC_CHARACTERS_AREA,
+  )
+
+  const packUntilColsFilled = (colIndexes) => {
+    let i = 0
+    while (
+      i < rest.length &&
+      colIndexes.some((c) => cols[c].list.length === 0)
+    ) {
+      packItem(cols, rest[i], colWidth, gapPx)
+      i += 1
     }
-    const aspect = item.height / item.width
-    const tileH = colWidth * aspect + gapPx
-    shortest.list.push(item)
-    shortest.height += tileH
+    return i
   }
+
+  if (characters && n >= 4) {
+    let i = packUntilColsFilled([2, 3])
+    pinSpanTwo(cols, characters, 2, colWidth, gapPx)
+    for (; i < rest.length; i++) {
+      packItem(cols, rest[i], colWidth, gapPx)
+    }
+  } else if (characters && n === 2) {
+    let i = packUntilColsFilled([0, 1])
+    pinSpanTwo(cols, characters, 0, colWidth, gapPx)
+    for (; i < rest.length; i++) {
+      packItem(cols, rest[i], colWidth, gapPx)
+    }
+  } else {
+    rest.forEach((item) => packItem(cols, item, colWidth, gapPx))
+    if (characters) packItem(cols, characters, colWidth, gapPx)
+  }
+
   return cols.map((c) => c.list)
 }
 
@@ -191,13 +253,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="px-5 pb-16 md:px-8 md:pb-20">
+      <div className="px-[clamp(1.25rem,5vw,4rem)]">
         <BrandKitsSection />
+      </div>
 
+      <div className="px-5 pb-16 md:px-8 md:pb-20">
+        <h2
+          id="ai-gallery-heading"
+          className="mt-12 mb-0 font-sans text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-[1.08] tracking-tight text-brand-ink md:mt-16"
+        >
+          AI Gallery
+        </h2>
         <section
           ref={rootRef}
-          className="home-mosaic mt-12 md:mt-16"
-          aria-label="Selected work"
+          className="home-mosaic mt-5 md:mt-6"
+          aria-labelledby="ai-gallery-heading"
         >
         {columns.map((colItems, colIndex) => (
           <div
@@ -231,7 +301,7 @@ export default function HomePage() {
                     alt={alt}
                     width={width}
                     height={height}
-                    sizes={isHero ? sizesHero : sizes}
+                    sizes={isSpanTwo ? sizesHero : sizes}
                     loading={isHero ? 'eager' : 'lazy'}
                     decoding={isHero ? 'sync' : 'async'}
                     {...(isHero ? { fetchPriority: 'high' } : {})}
