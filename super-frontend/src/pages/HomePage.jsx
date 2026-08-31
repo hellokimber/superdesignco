@@ -1,4 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react'
+import BrandKitsSection from '../components/BrandKitsSection.jsx'
+import heroLandscape from '../assets/imgs/SuperDesign_about-streaks.jpg'
 import { HOME_GRID } from '../data/homeGrid.js'
 
 const HOME_MOSAIC_HERO_AREA = 't2'
@@ -123,23 +125,80 @@ export default function HomePage() {
   const sizes = sizesForColumnCount(colCount)
   const sizesHero = sizesForHero(colCount)
 
+  const inquireNowHref = () => {
+    const email = import.meta.env.VITE_CONTACT_EMAIL?.trim()
+    const subject = 'Inquire now'
+    if (email) {
+      const q = new URLSearchParams({ subject })
+      return `mailto:${email}?${q}`
+    }
+    return `mailto:hello@superdesigncompany.com?subject=${encodeURIComponent(subject)}`
+  }
+
   return (
-    <div className="px-5 pb-16 pt-6 md:px-8 md:pb-20 md:pt-8">
-      <section aria-labelledby="hero-heading" className="max-w-[min(100%,52rem)]">
-        <h1
-          id="hero-heading"
-          className="m-0 font-sans text-[clamp(1.75rem,5vw,3.25rem)] font-bold leading-[1.08] tracking-tight text-brand-ink"
+    <>
+      <div className="px-[clamp(1.25rem,5vw,4rem)] pb-16 pt-[clamp(5rem,14vw,12.5rem)] md:pb-24">
+        <section
+          aria-labelledby="hero-heading"
+          className="max-w-[min(100%,72rem)]"
         >
-          AI-native designer with the foundation of a{' '}
-          <span className="font-serif font-normal italic">fine artist</span>
-        </h1>
-      </section>
+          <h1
+            id="hero-heading"
+            className="m-0 font-sans text-[clamp(5.25rem,15vw,9.75rem)] font-bold leading-[0.95] tracking-tight text-brand-ink"
+          >
+            Stand out.
+            <br />
+            Launch fast.
+          </h1>
+          <p className="mt-4 m-0 font-sans text-[clamp(1.3125rem,3.75vw,2.4375rem)] font-normal leading-[1.2] tracking-tight text-brand-ink md:mt-5">
+            Branding for pre-launch and early stage startups.
+          </p>
+        </section>
+      </div>
 
       <section
-        ref={rootRef}
-        className="home-mosaic mt-12 md:mt-16"
-        aria-label="Selected work"
+        aria-labelledby="studio-heading"
+        className="relative h-[34.375rem] w-full overflow-hidden"
       >
+        <img
+          src={heroLandscape}
+          alt="Dark mountain ridge with vertical purple and blue light streaks"
+          width={1024}
+          height={573}
+          sizes="100vw"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover object-[center_20%]"
+        />
+        <div className="absolute inset-0 flex items-center justify-center bg-black/20 px-5 md:px-8">
+          <div className="max-w-[min(100%,44rem)] text-center text-white">
+            <p
+              id="studio-heading"
+              className="m-0 font-serif text-[clamp(1.35rem,3.4vw,2.15rem)] font-normal leading-[1.4] tracking-tight"
+            >
+              Super is an independent brand studio for founders and builders. For
+              the ones with the audacity and the drive to make the impossible
+              happen.
+            </p>
+            <a
+              href={inquireNowHref()}
+              className="mt-8 inline-flex h-10 items-center justify-center rounded-full bg-brand-lavender px-5 text-xs font-medium tracking-wide text-brand-ink no-underline transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-lavender md:mt-10 md:h-11 md:px-6 md:text-sm"
+            >
+              inquire now
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <div className="px-5 pb-16 md:px-8 md:pb-20">
+        <BrandKitsSection />
+
+        <section
+          ref={rootRef}
+          className="home-mosaic mt-12 md:mt-16"
+          aria-label="Selected work"
+        >
         {columns.map((colItems, colIndex) => (
           <div
             key={colIndex}
@@ -186,7 +245,8 @@ export default function HomePage() {
             })}
           </div>
         ))}
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   )
 }
