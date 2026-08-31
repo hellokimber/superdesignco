@@ -28,7 +28,7 @@ export default function Header() {
       <div className="flex shrink-0 items-center gap-3 md:gap-4">
         <a
           href={contactHref()}
-          className="inline-flex h-12 shrink-0 items-center justify-center rounded-full bg-brand-ink px-5 text-center text-[clamp(1.125rem,1.2vw+0.7rem,1.25rem)] font-medium text-white no-underline transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink md:px-6"
+          className="inline-flex h-12 shrink-0 items-center justify-center rounded-full bg-brand-ink px-5 text-center text-[clamp(1.125rem,1.2vw+0.7rem,1.25rem)] font-medium text-white no-underline transition-colors hover:bg-brand-iris hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink md:px-6"
         >
           Reserve your spot
         </a>
@@ -36,7 +36,7 @@ export default function Header() {
           href={X_PROFILE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-ink text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink md:h-11 md:w-11"
+          className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-ink text-white transition-colors hover:bg-brand-iris hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink md:h-11 md:w-11"
           aria-label="The Super Design Company on X"
         >
           <svg

@@ -167,7 +167,10 @@ function inquireNowHref(subject = 'Inquire now') {
 }
 
 const STUDIO_CTA_CLASS =
-  'mt-8 inline-flex h-12 items-center justify-center rounded-full px-5 text-[clamp(1.125rem,1.2vw+0.7rem,1.25rem)] font-medium no-underline transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 md:mt-10 md:px-6'
+  'mt-8 inline-flex h-12 items-center justify-center rounded-full px-5 text-[clamp(1.125rem,1.2vw+0.7rem,1.25rem)] font-medium no-underline transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 md:mt-10 md:px-6'
+
+const WHITE_OUTLINE_CTA_CLASS =
+  'border-2 border-white bg-transparent text-white hover:bg-white hover:text-brand-ink focus-visible:outline-white'
 
 function StudioBand({
   headingId,
@@ -183,8 +186,76 @@ function StudioBand({
   emblemSrc,
   ctaLabel,
   ctaSubject = 'Inquire now',
-  ctaClassName = 'bg-brand-lavender text-brand-ink focus-visible:outline-brand-lavender',
+  ctaClassName = 'bg-brand-lavender text-brand-ink hover:bg-brand-iris hover:text-white focus-visible:outline-brand-lavender',
+  pill = false,
 }) {
+  const inner = (
+    <>
+      {emblemSrc ? (
+        <img
+          src={emblemSrc}
+          alt=""
+          width={70}
+          height={70}
+          aria-hidden
+          className="mx-auto mb-6 h-14 w-14 md:mb-8 md:h-16 md:w-16"
+        />
+      ) : null}
+      <p
+        id={headingId}
+        className={`m-0 font-serif font-normal tracking-tight ${copyClassName}`}
+      >
+        {copy}
+      </p>
+      {ctaLabel ? (
+        <a
+          href={inquireNowHref(ctaSubject)}
+          className={`${STUDIO_CTA_CLASS} ${ctaClassName}`}
+        >
+          {ctaLabel}
+        </a>
+      ) : null}
+    </>
+  )
+
+  if (pill) {
+    return (
+      <section
+        aria-labelledby={headingId}
+        className="px-[clamp(1.25rem,5vw,4rem)] py-8 md:py-12"
+      >
+        <div className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-full px-10 py-12 text-center text-white md:px-16 md:py-16">
+          {src ? (
+            <>
+              <img
+                src={src}
+                alt={alt}
+                width={width}
+                height={height}
+                sizes="100vw"
+                loading={eager ? 'eager' : 'lazy'}
+                decoding="async"
+                className={`pointer-events-none absolute inset-0 h-full w-full object-cover ${objectClass}`}
+                {...(eager ? { fetchPriority: 'high' } : {})}
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-brand-lavender/70 mix-blend-multiply"
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-brand-ink/25"
+              />
+            </>
+          ) : null}
+          <div className="relative z-10 flex flex-col items-center">
+            {inner}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section
       aria-labelledby={headingId}
@@ -203,30 +274,7 @@ function StudioBand({
       />
       <div className="absolute inset-0 flex items-center justify-center bg-black/20 px-5 md:px-8">
         <div className={`${copyMaxClassName} text-center text-white`}>
-          {emblemSrc ? (
-            <img
-              src={emblemSrc}
-              alt=""
-              width={70}
-              height={70}
-              aria-hidden
-              className="mx-auto mb-6 h-14 w-14 md:mb-8 md:h-16 md:w-16"
-            />
-          ) : null}
-          <p
-            id={headingId}
-            className={`m-0 font-serif font-normal tracking-tight ${copyClassName}`}
-          >
-            {copy}
-          </p>
-          {ctaLabel ? (
-            <a
-              href={inquireNowHref(ctaSubject)}
-              className={`${STUDIO_CTA_CLASS} ${ctaClassName}`}
-            >
-              {ctaLabel}
-            </a>
-          ) : null}
+          {inner}
         </div>
       </div>
     </section>
@@ -294,9 +342,12 @@ export default function HomePage() {
         alt="Dark mountain ridge with vertical purple and blue light streaks"
         width={1024}
         height={573}
-        copy="We build you a brand that stands out, but is light enough to keep up with the speed you ship."
+        copy="We build you a brand that stands out but is light enough to keep up with the speed you ship."
         copyClassName="text-[clamp(2.16rem,5.44vw,3.44rem)] leading-[1.12]"
         copyMaxClassName="max-w-[min(100%,72.8rem)]"
+        ctaLabel="Work with us"
+        ctaSubject="Work with us"
+        ctaClassName={WHITE_OUTLINE_CTA_CLASS}
       />
 
       <div className="px-[clamp(1.25rem,5vw,4rem)] pb-16 md:pb-24">
@@ -305,14 +356,23 @@ export default function HomePage() {
 
       <StudioBand
         headingId="studio-heading-midpage"
+        pill
         src={midpageLandscape}
         alt="Grainy twilight ridge with a glowing peach and lavender horizon"
         width={1024}
         height={438}
         objectClass="object-center"
-        copy="Your startup isn't generic. Your branding shouldn't be either."
+        copy={
+          <>
+            Your startup isn&apos;t generic.
+            <br />
+            Your branding shouldn&apos;t be either.
+          </>
+        }
+        copyClassName="text-[clamp(2.16rem,5.44vw,3.44rem)] leading-[1.12]"
         ctaLabel="Reserve your spot"
         ctaSubject="Reserve your spot"
+        ctaClassName={WHITE_OUTLINE_CTA_CLASS}
       />
 
       <div className="px-5 pb-16 md:px-8 md:pb-20">
@@ -387,10 +447,11 @@ export default function HomePage() {
         height={438}
         objectClass="object-center"
         emblemSrc={emblemWhite}
-        copy="Super is an independent brand studio for founders and builders. For the ones with the audacity and the drive to make the impossible happen."
+        copy="The Super Design Company is an independent brand studio for founders and builders. For the ones with the audacity and the drive to make the impossible happen."
+        copyMaxClassName="max-w-[min(100%,52.8rem)]"
         ctaLabel="Work with us"
         ctaSubject="Work with us"
-        ctaClassName="border-2 border-white bg-transparent text-white focus-visible:outline-white"
+        ctaClassName={WHITE_OUTLINE_CTA_CLASS}
       />
     </>
   )

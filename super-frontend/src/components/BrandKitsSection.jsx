@@ -17,6 +17,7 @@ const BASE_KIT = {
     'Three images',
     'Base components',
     'Base voice rules',
+    'HTML brand kit with assets and instructions for you + your agent',
   ],
 }
 
@@ -37,6 +38,7 @@ const FULL_KIT = {
     'Voice and copy',
     '3–5 taglines',
     'Logo + UI animations',
+    'HTML brand kit with assets and instructions for you + your agent',
   ],
 }
 
@@ -540,15 +542,9 @@ function OfferingCard({
         </h3>
         <a
           href={inquireHref(inquireSubject)}
-          className="inline-flex h-14 shrink-0 items-center gap-1 rounded-full bg-brand-lavender py-1 pl-5 pr-4 text-[clamp(1.125rem,1.2vw+0.7rem,1.25rem)] font-medium text-brand-ink no-underline transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-lavender md:pl-6 md:pr-5"
+          className="inline-flex h-14 shrink-0 items-center justify-center rounded-full bg-brand-lavender px-5 py-1 text-[clamp(1.125rem,1.2vw+0.7rem,1.25rem)] font-medium text-brand-ink no-underline transition-colors hover:bg-brand-iris hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-lavender md:px-6"
         >
           Inquire
-          <span
-            aria-hidden
-            className="relative top-px text-[2.5em] font-light leading-none"
-          >
-            +
-          </span>
         </a>
       </div>
 
