@@ -1,6 +1,9 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import BrandKitsSection from '../components/BrandKitsSection.jsx'
 import heroLandscape from '../assets/imgs/SuperDesign_about-streaks.jpg'
+import midpageLandscape from '../assets/imgs/SuperDesign_about-horizon.jpg'
+import footerLandscape from '../assets/imgs/SuperDesign_hero-hills.jpg'
+import emblemWhite from '../assets/super-logo/Super-Emblem-white.svg'
 import { HOME_GRID } from '../data/homeGrid.js'
 
 const HOME_MOSAIC_HERO_AREA = 't2'
@@ -154,6 +157,82 @@ function sizesForHero(colCount) {
   return '(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1023px) calc(100vw - 2.5rem), calc(50vw - 3.5rem)'
 }
 
+function inquireNowHref(subject = 'Inquire now') {
+  const email = import.meta.env.VITE_CONTACT_EMAIL?.trim()
+  if (email) {
+    const q = new URLSearchParams({ subject })
+    return `mailto:${email}?${q}`
+  }
+  return `mailto:hello@superdesigncompany.com?subject=${encodeURIComponent(subject)}`
+}
+
+const STUDIO_CTA_CLASS =
+  'mt-8 inline-flex h-12 items-center justify-center rounded-full px-5 text-[clamp(1.125rem,1.2vw+0.7rem,1.25rem)] font-medium no-underline transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 md:mt-10 md:px-6'
+
+function StudioBand({
+  headingId,
+  eager = false,
+  src,
+  alt,
+  width,
+  height,
+  objectClass = 'object-[center_20%]',
+  copy,
+  copyClassName = 'text-[clamp(1.35rem,3.4vw,2.15rem)] leading-[1.4]',
+  copyMaxClassName = 'max-w-[min(100%,48rem)]',
+  emblemSrc,
+  ctaLabel,
+  ctaSubject = 'Inquire now',
+  ctaClassName = 'bg-brand-lavender text-brand-ink focus-visible:outline-brand-lavender',
+}) {
+  return (
+    <section
+      aria-labelledby={headingId}
+      className="relative h-[34.375rem] w-full overflow-hidden"
+    >
+      <img
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        sizes="100vw"
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+        className={`absolute inset-0 h-full w-full object-cover ${objectClass}`}
+        {...(eager ? { fetchPriority: 'high' } : {})}
+      />
+      <div className="absolute inset-0 flex items-center justify-center bg-black/20 px-5 md:px-8">
+        <div className={`${copyMaxClassName} text-center text-white`}>
+          {emblemSrc ? (
+            <img
+              src={emblemSrc}
+              alt=""
+              width={70}
+              height={70}
+              aria-hidden
+              className="mx-auto mb-6 h-14 w-14 md:mb-8 md:h-16 md:w-16"
+            />
+          ) : null}
+          <p
+            id={headingId}
+            className={`m-0 font-serif font-normal tracking-tight ${copyClassName}`}
+          >
+            {copy}
+          </p>
+          {ctaLabel ? (
+            <a
+              href={inquireNowHref(ctaSubject)}
+              className={`${STUDIO_CTA_CLASS} ${ctaClassName}`}
+            >
+              {ctaLabel}
+            </a>
+          ) : null}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export default function HomePage() {
   const rootRef = useRef(null)
   const [{ columns, colCount }, setLayout] = useState(initialPackedColumns)
@@ -187,16 +266,6 @@ export default function HomePage() {
   const sizes = sizesForColumnCount(colCount)
   const sizesHero = sizesForHero(colCount)
 
-  const inquireNowHref = () => {
-    const email = import.meta.env.VITE_CONTACT_EMAIL?.trim()
-    const subject = 'Inquire now'
-    if (email) {
-      const q = new URLSearchParams({ subject })
-      return `mailto:${email}?${q}`
-    }
-    return `mailto:hello@superdesigncompany.com?subject=${encodeURIComponent(subject)}`
-  }
-
   return (
     <>
       <div className="px-[clamp(1.25rem,5vw,4rem)] pb-16 pt-[clamp(5rem,14vw,12.5rem)] md:pb-24">
@@ -218,52 +287,44 @@ export default function HomePage() {
         </section>
       </div>
 
-      <section
-        aria-labelledby="studio-heading"
-        className="relative h-[34.375rem] w-full overflow-hidden"
-      >
-        <img
-          src={heroLandscape}
-          alt="Dark mountain ridge with vertical purple and blue light streaks"
-          width={1024}
-          height={573}
-          sizes="100vw"
-          loading="eager"
-          fetchPriority="high"
-          decoding="async"
-          className="absolute inset-0 h-full w-full object-cover object-[center_20%]"
-        />
-        <div className="absolute inset-0 flex items-center justify-center bg-black/20 px-5 md:px-8">
-          <div className="max-w-[min(100%,44rem)] text-center text-white">
-            <p
-              id="studio-heading"
-              className="m-0 font-serif text-[clamp(1.35rem,3.4vw,2.15rem)] font-normal leading-[1.4] tracking-tight"
-            >
-              Super is an independent brand studio for founders and builders. For
-              the ones with the audacity and the drive to make the impossible
-              happen.
-            </p>
-            <a
-              href={inquireNowHref()}
-              className="mt-8 inline-flex h-10 items-center justify-center rounded-full bg-brand-lavender px-5 text-xs font-medium tracking-wide text-brand-ink no-underline transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-lavender md:mt-10 md:h-11 md:px-6 md:text-sm"
-            >
-              inquire now
-            </a>
-          </div>
-        </div>
-      </section>
+      <StudioBand
+        headingId="studio-heading"
+        eager
+        src={heroLandscape}
+        alt="Dark mountain ridge with vertical purple and blue light streaks"
+        width={1024}
+        height={573}
+        copy="We build you a brand that stands out, but is light enough to keep up with the speed you ship."
+        copyClassName="text-[clamp(2.16rem,5.44vw,3.44rem)] leading-[1.12]"
+        copyMaxClassName="max-w-[min(100%,72.8rem)]"
+      />
 
-      <div className="px-[clamp(1.25rem,5vw,4rem)]">
+      <div className="px-[clamp(1.25rem,5vw,4rem)] pb-16 md:pb-24">
         <BrandKitsSection />
       </div>
+
+      <StudioBand
+        headingId="studio-heading-midpage"
+        src={midpageLandscape}
+        alt="Grainy twilight ridge with a glowing peach and lavender horizon"
+        width={1024}
+        height={438}
+        objectClass="object-center"
+        copy="Your startup isn't generic. Your branding shouldn't be either."
+        ctaLabel="Reserve your spot"
+        ctaSubject="Reserve your spot"
+      />
 
       <div className="px-5 pb-16 md:px-8 md:pb-20">
         <h2
           id="ai-gallery-heading"
           className="mt-12 mb-0 font-sans text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-[1.08] tracking-tight text-brand-ink md:mt-16"
         >
-          AI Gallery
+          AI gallery
         </h2>
+        <p className="mt-2 m-0 font-serif text-xl font-normal italic tracking-tight text-brand-ink md:text-2xl">
+          Editorial + product photography, characters and avatars
+        </p>
         <section
           ref={rootRef}
           className="home-mosaic mt-5 md:mt-6"
@@ -317,6 +378,20 @@ export default function HomePage() {
         ))}
         </section>
       </div>
+
+      <StudioBand
+        headingId="studio-heading-footer"
+        src={footerLandscape}
+        alt="Grainy twilight hills with a glowing peach and lavender horizon"
+        width={1024}
+        height={438}
+        objectClass="object-center"
+        emblemSrc={emblemWhite}
+        copy="Super is an independent brand studio for founders and builders. For the ones with the audacity and the drive to make the impossible happen."
+        ctaLabel="Work with us"
+        ctaSubject="Work with us"
+        ctaClassName="border-2 border-white bg-transparent text-white focus-visible:outline-white"
+      />
     </>
   )
 }
