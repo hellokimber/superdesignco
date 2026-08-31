@@ -43,6 +43,46 @@
     font-display: swap;
   }
 
+  @font-face {
+    font-family: 'Rethink Sans';
+    src: url('./assets/fonts/brooks/rethink-sans-400.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Rethink Sans';
+    src: url('./assets/fonts/brooks/rethink-sans-600.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Rethink Sans';
+    src: url('./assets/fonts/brooks/rethink-sans-700.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Libertinus Serif';
+    src: url('./assets/fonts/brooks/libertinus-serif-400.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Libertinus Serif';
+    src: url('./assets/fonts/brooks/libertinus-serif-600.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
   body {
     @apply m-0 antialiased;
     font-family: 'GT Walsheim Pro', system-ui, sans-serif;

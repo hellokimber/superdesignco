@@ -5,11 +5,12 @@ const X_PROFILE_URL = 'https://x.com/thesuperdesign'
 
 const contactHref = () => {
   const email = import.meta.env.VITE_CONTACT_EMAIL?.trim()
+  const subject = 'Reserve your spot'
   if (email) {
-    const q = new URLSearchParams({ subject: 'Let’s work together' })
+    const q = new URLSearchParams({ subject })
     return `mailto:${email}?${q}`
   }
-  return 'mailto:hello@superdesigncompany.com?subject=Let%E2%80%99s%20work%20together'
+  return `mailto:hello@superdesigncompany.com?subject=${encodeURIComponent(subject)}`
 }
 
 export default function Header() {
@@ -27,15 +28,15 @@ export default function Header() {
       <div className="flex shrink-0 items-center gap-3 md:gap-4">
         <a
           href={contactHref()}
-          className="inline-flex h-10 shrink-0 items-center justify-center rounded-full bg-brand-ink px-4 text-center text-xs font-medium tracking-wide text-white no-underline transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink md:h-11 md:px-5 md:text-sm"
+          className="inline-flex h-12 shrink-0 items-center justify-center rounded-full bg-brand-ink px-5 text-center text-[clamp(1.125rem,1.2vw+0.7rem,1.25rem)] font-medium text-white no-underline transition-colors hover:bg-brand-iris hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink md:px-6"
         >
-          Let’s work together!
+          Reserve your spot
         </a>
         <a
           href={X_PROFILE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-ink text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink md:h-11 md:w-11"
+          className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-ink text-white transition-colors hover:bg-brand-iris hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink md:h-11 md:w-11"
           aria-label="The Super Design Company on X"
         >
           <svg

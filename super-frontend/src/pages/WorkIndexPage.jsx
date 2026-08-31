@@ -5,7 +5,7 @@ export default function WorkIndexPage() {
   return (
     <div className="px-5 py-10 md:px-8 md:py-14">
       <div className="mx-auto max-w-2xl">
-        <h1 className="m-0 font-serif text-3xl font-bold lowercase tracking-tight md:text-4xl">
+        <h1 className="m-0 font-serif text-3xl font-bold tracking-tight md:text-4xl">
           Work
         </h1>
         <ul className="mt-8 list-none space-y-3 p-0">

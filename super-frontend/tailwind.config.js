@@ -11,6 +11,9 @@ export default {
         brand: {
           yellow: '#F9EC31',
           ink: '#050505',
+          lavender: '#B5A6FF',
+          iris: '#3C56DE',
+          rose: '#FF4568',
         },
       },
     },

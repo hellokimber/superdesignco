@@ -5,7 +5,7 @@ export default function GalleryPage() {
     <div className="px-5 py-10 md:px-8 md:py-14">
       <div className="mx-auto max-w-6xl">
         <header className="mb-10 max-w-2xl">
-          <h1 className="m-0 font-serif text-3xl font-bold lowercase tracking-tight md:text-4xl">
+          <h1 className="m-0 font-serif text-3xl font-bold tracking-tight md:text-4xl">
             AI explorations
           </h1>
           <p className="mt-4 text-base font-light leading-relaxed text-neutral-700 md:text-lg">
