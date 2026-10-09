@@ -1,0 +1,17 @@
+# The Super Design Company
+
+> An independent brand studio offering branding for pre-launch and early-stage startups.
+
+The studio creates brand kits for founders and builders. Services include logos, color palettes, typography, brand imagery, components, and voice guidance. Brand kits include an HTML brand kit with assets and instructions for founders and their AI agents.
+
+Add-ons include landing pages, slide decks, product pages, social templates, digital ads, brand avatars, and AI product photography.
+
+## Website
+
+- [Brand kits and services](https://superdesigncompany.com/): Current offerings, starting prices, brand examples, and contact links.
+
+## Contact
+
+- Email: hello@superdesigncompany.com
+
+The website is the source of truth for current services and pricing.
