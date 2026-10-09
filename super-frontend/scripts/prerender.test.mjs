@@ -6,8 +6,17 @@ import test from 'node:test'
 import { PAGES, SITE_URL } from '../src/data/pages.js'
 import { SITE } from '../src/data/site.js'
 import { serializeStructuredData } from '../src/data/structuredData.js'
+import { BRAND_KIT_FAQ } from '../src/data/brandKitFaq.js'
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url))
+const escapeHtml = (text) => text.replace(/[&<>"']/g, (character) => ({
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#x27;',
+})[character])
+
 
 for (const page of PAGES) {
   test(`published HTML: ${page.path}`, async () => {
@@ -73,6 +82,20 @@ for (const page of PAGES) {
       assert.equal(webpage.isPartOf['@id'], website['@id'])
       assert.equal(webpage.about['@id'], organization['@id'])
       assert.equal(webpage.url, properties['og:url'])
+      assert.equal(webpage.dateModified, page.dateModified)
+      assert.match(page.dateModified, /^\d{4}-\d{2}-\d{2}$/)
+      assert.equal(new Date(`${page.dateModified}T00:00:00Z`).toISOString().slice(0, 10), page.dateModified)
+      assert.ok(body.includes(`<time dateTime="${page.dateModified}">`))
+      const faq = body.match(/<section id="brand-kit-faq"[^>]*>([\s\S]*?)<\/section>/)?.[1]
+      assert.ok(faq, 'FAQ content is present in the initial HTML')
+      assert.equal((faq.match(/<h3(?:\s|>)/g) ?? []).length, BRAND_KIT_FAQ.length)
+      for (const item of BRAND_KIT_FAQ) {
+        assert.ok(item.question.endsWith('?'), 'FAQ headings are questions')
+        assert.ok(faq.includes(escapeHtml(item.question)))
+        for (const paragraph of item.answer.split(/\n\s*\n/)) {
+          assert.ok(faq.includes(escapeHtml(paragraph)), 'complete FAQ answer paragraphs are available in HTML without JavaScript')
+        }
+      }
       for (const text of ['Stand out.', 'Branding for pre-launch', 'Base brand kit', 'Full brand kit', '1k USD', '5k USD']) {
         assert.ok(body.includes(text), `homepage contains ${text}`)
       }
@@ -96,7 +119,14 @@ test('404 HTML has useful content, no canonical, and noindex', async () => {
 test('sitemap includes finished pages only', async () => {
   const sitemap = await readFile(join(dist, 'sitemap.xml'), 'utf8')
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1])
-  assert.deepEqual(urls, PAGES.filter((page) => page.indexable).map((page) => `${SITE_URL}${page.path}`))
+  const indexablePages = PAGES.filter((page) => page.indexable)
+  assert.deepEqual(urls, indexablePages.map((page) => `${SITE_URL}${page.path}`))
+  const entries = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)]
+  for (const [index, entry] of entries.entries()) {
+    const dateModified = indexablePages[index].dateModified
+    if (dateModified) assert.ok(entry[1].includes(`<lastmod>${dateModified}</lastmod>`))
+    else assert.ok(!entry[1].includes('<lastmod>'), 'no invented dates for undated pages')
+  }
 })
 
 

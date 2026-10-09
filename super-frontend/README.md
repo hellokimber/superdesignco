@@ -34,6 +34,12 @@ The homepage service description is its visible H1. Services, selected works, an
 
 Every known page has Open Graph tags in its initial HTML. The 1200 × 630 PNG at `public/social-preview.png` uses the existing logo and fonts. Its editable source is `scripts/social-card.html`; render that file at 1200 × 630 with a device scale factor of 1, wait for fonts to load, and save the PNG to regenerate it.
 
+## Homepage FAQ and freshness
+
+`src/data/brandKitFaq.js` contains the eight FAQ questions and answers, presented in native details/summary accordions that also work without JavaScript. They reflect the published package contents, starting prices, add-ons, and inquiry links. Update the FAQ when those details change. Timelines, revision policies, and other unconfirmed commitments are omitted.
+
+The homepage `dateModified` in `src/data/pages.js` records its last substantial content update. It appears in the visible FAQ date, WebPage JSON-LD, and sitemap `lastmod`. Update it when homepage content changes. Routine rebuilds must not advance it, and undated draft pages receive no fabricated dates.
+
 ## Verification
 
 After a build, rerun HTML checks with `npm run test:html` from this directory. Run `npm run lint` from the repository root for source checks.

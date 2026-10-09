@@ -10,6 +10,8 @@ export const PAGES = [
     description:
       'Branding for pre-launch and early-stage startups. Explore brand kits, logos, typography, imagery, and voice guidance from The Super Design Company.',
     indexable: true,
+    // Update only when the homepage content changes, not for routine builds.
+    dateModified: '2026-10-09',
   },
   {
     path: '/work/',
