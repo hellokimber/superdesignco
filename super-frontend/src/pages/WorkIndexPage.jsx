@@ -12,7 +12,7 @@ export default function WorkIndexPage() {
           {PROJECTS.map(({ slug, title }) => (
             <li key={slug}>
               <Link
-                to={`/work/${slug}`}
+                to={`/work/${slug}/`}
                 className="text-lg font-light text-inherit underline underline-offset-4 transition-opacity hover:opacity-80"
               >
                 {title}

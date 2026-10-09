@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
+import NotFoundPage from './pages/NotFoundPage.jsx'
 
 const HomePage = lazy(() => import('./pages/HomePage.jsx'))
 const GalleryPage = lazy(() => import('./pages/GalleryPage.jsx'))
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="explorations" element={<GalleryPage />} />
           <Route path="work" element={<WorkIndexPage />} />
           <Route path="work/:slug" element={<ProjectPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </Suspense>

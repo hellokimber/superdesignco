@@ -1,9 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
-// Set VITE_BASE_URL in CI (e.g. /repo-name/) for GitHub project pages; use / for a custom domain.
-export default defineConfig({
+// Set VITE_BASE_URL for deployments below a subpath; production uses /.
+export default defineConfig(({ isSsrBuild }) => ({
   base: process.env.VITE_BASE_URL || '/',
   plugins: [react()],
-})
+  build: {
+    // The server bundle is build tooling, not a second published site.
+    copyPublicDir: !isSsrBuild,
+  },
+}))

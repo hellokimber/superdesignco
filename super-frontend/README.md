@@ -1,16 +1,33 @@
-# React + Vite
+# The Super Design Company frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React 19, React Router, and Vite. Production is hosted on Netlify.
 
-Currently, two official plugins are available:
+## Development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+From the repository root, run `npm run dev`. Development uses client rendering.
 
-## React Compiler
+## Production build
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+From the repository root, run `npm run build`. The build:
 
-## Expanding the ESLint configuration
+1. Builds browser JavaScript, styles, and assets into `super-frontend/dist`.
+2. Builds a temporary renderer into `super-frontend/dist-ssr`.
+3. Renders the existing React pages to complete HTML, including metadata.
+4. Generates a sitemap containing finished pages only.
+5. Runs HTML checks. A failure stops the build.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Only `dist` is deployed. React hydrates its HTML to attach interactions. The gallery starts from the same markup in the browser and build renderer, then adjusts to the viewport.
+
+## Page metadata and indexing
+
+`src/data/pages.js` defines known paths, titles, descriptions, and indexing status. `PageMetadata` uses those definitions for the initial HTML and browser navigation. Canonicals point to `https://superdesigncompany.com`, use trailing slashes, and omit tracking parameters and fragments.
+
+The homepage is indexable. Work, project, and exploration routes remain available with `noindex, follow` until their placeholder content is replaced. After finishing a page, update its metadata and set `indexable: true` to include it in the generated sitemap. Register new routes in both `App.jsx` and `pages.js`.
+
+Unknown URLs use the generated `404.html`. `public/_redirects` configures Netlify to return HTTP 404 while existing static files take precedence. Error pages have no canonical URL.
+
+## Verification
+
+After a build, rerun HTML checks with `npm run test:html` from this directory. Run `npm run lint` from the repository root for source checks.
+
+Verify a Netlify preview before merging changes to routing. Local Vite preview does not emulate Netlify redirect rules.

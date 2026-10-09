@@ -1,28 +1,12 @@
 import { Link, useParams } from 'react-router-dom'
 import { projectTitleForSlug } from '../data/projects.js'
+import NotFoundPage from './NotFoundPage.jsx'
 
 export default function ProjectPage() {
   const { slug } = useParams()
   const title = projectTitleForSlug(slug)
 
-  if (!title) {
-    return (
-      <div className="px-5 py-16 md:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h1 className="font-serif text-2xl font-bold">Not found</h1>
-          <p className="mt-4 text-neutral-600">
-            This project does not exist.
-          </p>
-          <Link
-            to="/"
-            className="mt-8 inline-block text-sm font-medium underline underline-offset-4"
-          >
-            Back to home
-          </Link>
-        </div>
-      </div>
-    )
-  }
+  if (!title) return <NotFoundPage />
 
   return (
     <div className="px-5 py-10 md:px-8 md:py-14">
