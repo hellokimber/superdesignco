@@ -24,7 +24,7 @@ export default function BrandKitFaq({ dateModified }) {
         )}
       </div>
       <div className="mx-auto mt-8 max-w-3xl md:mt-10">
-        {BRAND_KIT_FAQ.map(({ id, question, answer }) => (
+        {BRAND_KIT_FAQ.map(({ id, question, answer, link }) => (
           <details key={id} className="group border-t border-brand-ink/20 last:border-b">
             <summary
               className="mx-auto flex max-w-3xl min-h-16 cursor-pointer list-none items-center gap-6 py-5 text-brand-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-ink [&::-webkit-details-marker]:hidden"
@@ -41,6 +41,16 @@ export default function BrandKitFaq({ dateModified }) {
               {answer.split(/\n\s*\n/).map((paragraph) => (
                 <p key={paragraph} className="m-0">{paragraph}</p>
               ))}
+              {link && (
+                <p className="m-0">
+                  <a
+                    href={link.href}
+                    className="inline-flex min-h-11 items-center font-medium text-brand-ink underline underline-offset-4 hover:decoration-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-ink"
+                  >
+                    {link.label}
+                  </a>
+                </p>
+              )}
             </div>
           </details>
         ))}
