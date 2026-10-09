@@ -1,6 +1,6 @@
 import { PROJECTS } from './projects.js'
 
-export const SITE_URL = 'https://superdesigncompany.com'
+export { SITE_URL } from './site.js'
 
 // Only finished pages belong in the sitemap. Keep draft routes available for review.
 export const PAGES = [

@@ -387,13 +387,13 @@ function BrooksButtonStack() {
 
 function KitShowcase() {
   return (
-    <div className="mt-8 md:mt-12">
-      <h3
+    <section aria-labelledby="selected-works-heading" className="mt-8 md:mt-12">
+      <h2
         id="selected-works-heading"
         className="m-0 font-sans text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-[1.08] tracking-tight text-brand-ink"
       >
         Selected works
-      </h3>
+      </h2>
       <p className="mt-2 m-0 font-serif text-xl font-normal italic tracking-tight text-brand-ink md:text-2xl">
         Brooks full brand kit, selected highlights
       </p>
@@ -511,7 +511,7 @@ function KitShowcase() {
           />
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
@@ -585,23 +585,24 @@ function OfferingCard({
 
 export default function BrandKitsSection() {
   return (
-    <section aria-labelledby="services-heading" className="mt-12 md:mt-16">
-      <h2
-        id="services-heading"
-        className="m-0 pl-[1%] font-sans text-[clamp(1.75rem,4vw,2.5rem)] font-semibold leading-[1.08] tracking-tight text-brand-ink"
-      >
-        Services
-      </h2>
-      <div className="mt-6 flex flex-col gap-4 md:mt-8">
-        <OfferingCard {...BASE_KIT} />
-        <OfferingCard {...FULL_KIT} />
-        <OfferingCard {...ADD_ONS} />
-      </div>
-      <p className="mt-6 m-0 text-center text-[clamp(1.125rem,1.2vw+0.7rem,1.25rem)] leading-relaxed text-brand-ink/50 md:mt-8">
-        Open to equity as part of project compensation for qualified startups.
-      </p>
-
+    <>
+      <section aria-labelledby="services-heading" className="mt-12 md:mt-16">
+        <h2
+          id="services-heading"
+          className="m-0 pl-[1%] font-sans text-[clamp(1.75rem,4vw,2.5rem)] font-semibold leading-[1.08] tracking-tight text-brand-ink"
+        >
+          Services
+        </h2>
+        <div className="mt-6 flex flex-col gap-4 md:mt-8">
+          <OfferingCard {...BASE_KIT} />
+          <OfferingCard {...FULL_KIT} />
+          <OfferingCard {...ADD_ONS} />
+        </div>
+        <p className="mt-6 m-0 text-center text-[clamp(1.125rem,1.2vw+0.7rem,1.25rem)] leading-relaxed text-brand-ink/50 md:mt-8">
+          Open to equity as part of project compensation for qualified startups.
+        </p>
+      </section>
       <KitShowcase />
-    </section>
+    </>
   )
 }

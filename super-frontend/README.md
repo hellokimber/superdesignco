@@ -26,6 +26,14 @@ The homepage is indexable. Work, project, and exploration routes remain availabl
 
 Unknown URLs use the generated `404.html`. `public/_redirects` configures Netlify to return HTTP 404 while existing static files take precedence. Error pages have no canonical URL.
 
+## Headings, structured data, and sharing
+
+The homepage service description is its visible H1. Services, selected works, and the AI gallery use H2 headings; individual offerings use H3 headings. The large marketing headline keeps its appearance as a paragraph.
+
+`src/data/site.js` holds the shared studio identity and sharing image details. The homepage JSON-LD describes the organization, website, and page using the visible studio description, contact email, logo, and linked X profile. Draft and error pages do not publish this graph. JSON-LD text is escaped for safe embedding in HTML.
+
+Every known page has Open Graph tags in its initial HTML. The 1200 × 630 PNG at `public/social-preview.png` uses the existing logo and fonts. Its editable source is `scripts/social-card.html`; render that file at 1200 × 630 with a device scale factor of 1, wait for fonts to load, and save the PNG to regenerate it.
+
 ## Verification
 
 After a build, rerun HTML checks with `npm run test:html` from this directory. Run `npm run lint` from the repository root for source checks.
