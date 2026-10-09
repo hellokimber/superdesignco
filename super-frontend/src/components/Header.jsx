@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom'
 import logoBlack from '../assets/super-logo/Super-black.svg'
+import { SITE } from '../data/site.js'
 
-const X_PROFILE_URL = 'https://x.com/thesuperdesign'
+const X_PROFILE_URL = SITE.socialProfiles[0]
 
 const contactHref = () => {
   const email = import.meta.env.VITE_CONTACT_EMAIL?.trim()

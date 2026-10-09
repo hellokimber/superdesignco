@@ -312,17 +312,19 @@ export default function HomePage() {
           aria-labelledby="hero-heading"
           className="max-w-[min(100%,72rem)]"
         >
-          <h1
-            id="hero-heading"
+          <p
             className="m-0 font-sans text-[clamp(5.25rem,15vw,9.75rem)] font-bold leading-[0.95] tracking-tight text-brand-ink"
           >
             Stand out.
             <br />
             Launch fast.
-          </h1>
-          <p className="mt-4 m-0 font-sans text-[clamp(1.3125rem,3.75vw,2.4375rem)] font-normal leading-[1.2] tracking-tight text-brand-ink md:mt-5">
-            Branding for pre-launch and early stage startups.
           </p>
+          <h1
+            id="hero-heading"
+            className="mt-4 m-0 font-sans text-[clamp(1.3125rem,3.75vw,2.4375rem)] font-normal leading-[1.2] tracking-tight text-brand-ink md:mt-5"
+          >
+            Branding for pre-launch and early-stage startups.
+          </h1>
         </section>
       </div>
 
