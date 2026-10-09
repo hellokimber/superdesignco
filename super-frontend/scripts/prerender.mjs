@@ -35,7 +35,10 @@ await writePage('/__not-found/', '404.html')
 
 // Derive the sitemap from the same route registry as metadata and static HTML.
 const urls = PAGES.filter((page) => page.indexable)
-  .map((page) => `  <url><loc>${SITE_URL}${page.path}</loc></url>`)
+  .map((page) => {
+    const lastmod = page.dateModified ? `<lastmod>${page.dateModified}</lastmod>` : ''
+    return `  <url><loc>${SITE_URL}${page.path}</loc>${lastmod}</url>`
+  })
   .join('\n')
 await writeFile(
   join(dist, 'sitemap.xml'),

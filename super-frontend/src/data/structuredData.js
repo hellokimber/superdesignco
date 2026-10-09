@@ -32,6 +32,7 @@ export function structuredDataForPage(page, email) {
         '@id': `${SITE_URL}/#webpage`,
         name: page.title,
         description: page.description,
+        dateModified: page.dateModified,
         url: `${SITE_URL}/`,
         inLanguage: 'en',
         isPartOf: { '@id': websiteId },

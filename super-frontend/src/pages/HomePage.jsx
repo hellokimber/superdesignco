@@ -1,5 +1,7 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import BrandKitsSection from '../components/BrandKitsSection.jsx'
+import BrandKitFaq from '../components/BrandKitFaq.jsx'
+import { pageForPath } from '../data/pages.js'
 import heroLandscape from '../assets/imgs/SuperDesign_about-streaks.jpg'
 import midpageLandscape from '../assets/imgs/SuperDesign_about-horizon.jpg'
 import footerLandscape from '../assets/imgs/SuperDesign_hero-hills.jpg'
@@ -430,6 +432,12 @@ export default function HomePage() {
           </div>
         ))}
         </section>
+      </div>
+
+      <div className="px-[clamp(1.25rem,5vw,4rem)] pb-16 md:pb-24">
+        <BrandKitFaq
+          dateModified={pageForPath('/').dateModified}
+        />
       </div>
 
       <StudioBand
