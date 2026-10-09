@@ -123,18 +123,9 @@ function packMasonry(items, containerWidthPx, gapPx, colCount) {
 }
 
 function initialPackedColumns() {
-  if (typeof window === 'undefined') {
-    return { columns: [HOME_GRID], colCount: 1 }
-  }
-  const w = Math.max(320, window.innerWidth)
-  const n = columnCountForWidth(w)
-  const gapPx = w >= 768 ? 16 : 12
-  const pad = w >= 768 ? 64 : 40
-  const contentW = Math.max(200, w - pad)
-  return {
-    columns: packMasonry(HOME_GRID, contentW, gapPx, n),
-    colCount: n,
-  }
+  // Match the static HTML on the first client render. The existing layout effect
+  // measures the viewport and packs the responsive gallery after hydration.
+  return { columns: [HOME_GRID], colCount: 1 }
 }
 
 function sizesForColumnCount(colCount) {

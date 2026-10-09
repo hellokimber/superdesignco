@@ -1,1 +1,2 @@
-/*    /index.html   200
+# Existing static files take precedence. Unknown paths return a genuine 404.
+/*    /404.html   404
