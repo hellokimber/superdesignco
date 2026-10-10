@@ -1,4 +1,5 @@
 import { PROJECTS } from './projects.js'
+import { ARTICLES } from './articles.js'
 
 export { SITE_URL } from './site.js'
 
@@ -25,6 +26,23 @@ export const PAGES = [
     description: 'AI explorations from The Super Design Company. This gallery is in preparation.',
     indexable: false,
   },
+  {
+    path: '/blog/',
+    title: 'Blog | The Super Design Company',
+    description: 'Articles on brand strategy, visual design, and AI imagery. Learn how The Super Design Company plans brands and directs images.',
+    indexable: true,
+    dateModified: '2026-10-09',
+  },
+  ...ARTICLES.map((article) => ({
+    path: article.path,
+    title: `${article.title} | The Super Design Company`,
+    description: article.description,
+    indexable: true,
+    dateModified: article.dateModified,
+    datePublished: article.datePublished,
+    article,
+    shareImage: article.shareImage,
+  })),
   ...PROJECTS.map(({ slug, title }) => ({
     path: `/work/${slug}/`,
     title: `${title} | The Super Design Company`,

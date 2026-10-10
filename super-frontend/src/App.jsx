@@ -7,6 +7,8 @@ const HomePage = lazy(() => import('./pages/HomePage.jsx'))
 const GalleryPage = lazy(() => import('./pages/GalleryPage.jsx'))
 const WorkIndexPage = lazy(() => import('./pages/WorkIndexPage.jsx'))
 const ProjectPage = lazy(() => import('./pages/ProjectPage.jsx'))
+const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage.jsx'))
+const BlogArticlePage = lazy(() => import('./pages/BlogArticlePage.jsx'))
 
 function RouteFallback() {
   return (
@@ -25,6 +27,8 @@ export default function App() {
           <Route path="explorations" element={<GalleryPage />} />
           <Route path="work" element={<WorkIndexPage />} />
           <Route path="work/:slug" element={<ProjectPage />} />
+          <Route path="blog" element={<BlogIndexPage />} />
+          <Route path="blog/:slug" element={<BlogArticlePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

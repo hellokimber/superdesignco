@@ -10,6 +10,9 @@ Add-ons include landing pages, slide decks, product pages, social templates, dig
 
 - [Brand kits and services](https://superdesigncompany.com/): Current offerings, starting prices, brand examples, and contact links.
 
+- [Blog](https://superdesigncompany.com/blog/): Notes on brand strategy, visual identity, and AI art direction.
+- [Art direction before image generation](https://superdesigncompany.com/blog/art-direction-before-image-generation/): An introduction to the studio’s approach to AI art direction, with further reading.
+
 ## Contact
 
 - Email: hello@superdesigncompany.com

@@ -45,3 +45,9 @@ The homepage `dateModified` in `src/data/pages.js` records its last substantial 
 After a build, rerun HTML checks with `npm run test:html` from this directory. Run `npm run lint` from the repository root for source checks.
 
 Verify a Netlify preview before merging changes to routing. Local Vite preview does not emulate Netlify redirect rules.
+
+## Blog
+
+`src/data/articles.js` holds the article text, dates, author, and supporting citations. The blog lives at `/blog/`; articles live at `/blog/:slug/`. Add a complete article to the registry to include its route in static HTML generation and the sitemap. Images are mapped in `src/data/blogImages.js` using the studio’s existing gallery assets.
+
+The initial article is “Art direction before image generation.” Its editorial layout uses the existing studio fonts, gallery imagery, and thin dividers. The page publishes BlogPosting metadata alongside its canonical URL and visible byline/date. Update publication and modification dates deliberately when content changes.

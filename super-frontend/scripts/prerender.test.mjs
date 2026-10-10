@@ -49,11 +49,13 @@ for (const page of PAGES) {
     assert.equal(properties['og:title'], page.title)
     assert.equal(properties['og:description'], page.description)
     assert.equal(properties['og:url'], `${SITE_URL}${page.path}`)
-    assert.equal(properties['og:type'], 'website')
-    assert.equal(properties['og:image'], `${SITE_URL}${SITE.shareImage.path}`)
-    assert.equal(properties['og:image:type'], 'image/png')
-    assert.equal(properties['og:image:width'], '1200')
-    assert.equal(properties['og:image:height'], '630')
+    assert.equal(properties['og:type'], page.article ? 'article' : 'website')
+    const shareImage = page.shareImage ?? SITE.shareImage
+    assert.equal(properties['og:image'], `${SITE_URL}${shareImage.path}`)
+    await access(join(dist, shareImage.path.slice(1)))
+    assert.equal(properties['og:image:type'], shareImage.mimeType ?? 'image/png')
+    assert.equal(properties['og:image:width'], String(shareImage.width))
+    assert.equal(properties['og:image:height'], String(shareImage.height))
     assert.ok(properties['og:image:alt'])
 
 
@@ -105,6 +107,30 @@ for (const page of PAGES) {
       for (const text of ['Stand out.', 'Branding for pre-launch', 'Base brand kit', 'Full brand kit', '1k USD', '5k USD']) {
         assert.ok(body.includes(text), `homepage contains ${text}`)
       }
+    } else if (page.indexable) {
+      assert.equal(schemas.length, 1, 'finished blog pages have one JSON-LD graph')
+      const graph = JSON.parse(schemas[0][1])['@graph']
+      const webpage = graph.find((node) => ['WebPage', 'CollectionPage'].includes(node['@type']))
+      assert.equal(webpage.url, `${SITE_URL}${page.path}`)
+      assert.equal(webpage.dateModified, page.dateModified)
+      assert.ok(body.includes('href="/blog/"'))
+      if (page.article) {
+        const article = graph.find((node) => node['@type'] === 'BlogPosting')
+        assert.equal(article.headline, page.article.title)
+        assert.equal(article.author.name, page.article.author)
+        assert.equal(article.datePublished, page.datePublished)
+        assert.equal(article.dateModified, page.dateModified)
+        assert.equal(article.mainEntityOfPage['@id'], webpage['@id'])
+        for (const section of page.article.sections) {
+          for (const paragraph of section.paragraphs) assert.ok(body.includes(escapeHtml(paragraph)))
+          if (section.reference) {
+            assert.ok(body.includes(`href="${section.reference.href}"`), 'citations are visible crawlable links')
+            assert.ok(article.citation.includes(section.reference.href))
+          }
+        }
+        assert.equal((body.match(/<h2(?:\s|>)/g) ?? []).length, page.article.sections.length)
+        for (const fragment of ['ai-gallery-heading', 'services-heading']) assert.ok(body.includes(`href="/#${fragment}"`))
+      }
     } else {
       assert.equal(schemas.length, 0, 'drafts do not publish unsupported structured data')
     }
@@ -118,6 +144,7 @@ test('404 HTML has useful content, no canonical, and noindex', async () => {
   assert.ok(!html.includes('rel="canonical"'))
   assert.ok(!html.includes('property="og:url"'))
   assert.ok(!html.includes('application/ld+json'))
+  assert.ok(!html.includes('BlogPosting'))
   const redirects = await readFile(join(dist, '_redirects'), 'utf8')
   assert.ok(redirects.includes('/*    /404.html   404'))
 })

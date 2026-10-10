@@ -16,7 +16,7 @@ const contactHref = () => {
 
 export default function Header() {
   return (
-    <header className="flex h-20 flex-wrap items-center justify-between gap-4 px-5 md:px-8">
+    <header className="flex min-h-20 flex-wrap items-center justify-between gap-x-4 gap-y-3 px-5 py-4 md:px-8">
       <NavLink to="/" className="block w-24 shrink-0 md:w-[6em]" end>
         <img
           src={logoBlack}
@@ -26,7 +26,14 @@ export default function Header() {
           height={51}
         />
       </NavLink>
-      <div className="flex shrink-0 items-center gap-3 md:gap-4">
+      <div className="flex w-full shrink-0 items-center justify-between gap-3 sm:w-auto sm:justify-start md:gap-4">
+        <NavLink
+          to="/blog/"
+          onClick={() => window.scrollTo(0, 0)}
+          className={({ isActive }) => `inline-flex min-h-11 items-center text-base text-brand-ink underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-ink ${isActive ? 'underline' : 'no-underline'}`}
+        >
+          Blog
+        </NavLink>
         <a
           href={contactHref()}
           className="inline-flex h-12 shrink-0 items-center justify-center rounded-full bg-brand-ink px-5 text-center text-[clamp(1.125rem,1.2vw+0.7rem,1.25rem)] font-medium text-white no-underline transition-colors hover:bg-brand-iris hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink md:px-6"

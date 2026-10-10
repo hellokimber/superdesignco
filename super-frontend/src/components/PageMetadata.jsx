@@ -6,6 +6,7 @@ import { structuredDataForPage, serializeStructuredData } from '../data/structur
 export default function PageMetadata() {
   const { pathname } = useLocation()
   const page = pageForPath(pathname)
+  const shareImage = page?.shareImage ?? SITE.shareImage
   const email = import.meta.env.VITE_CONTACT_EMAIL?.trim() || 'hello@superdesigncompany.com'
   const structuredData = structuredDataForPage(page, email)
 
@@ -21,16 +22,22 @@ export default function PageMetadata() {
       {page && (
         <>
           <link rel="canonical" href={`${SITE_URL}${page.path}`} />
-          <meta property="og:type" content="website" />
+          <meta property="og:type" content={page.article ? 'article' : 'website'} />
+          {page.article && (
+            <>
+              <meta property="article:published_time" content={page.datePublished} />
+              <meta property="article:modified_time" content={page.dateModified} />
+            </>
+          )}
           <meta property="og:site_name" content={SITE.name} />
           <meta property="og:title" content={page.title} />
           <meta property="og:description" content={page.description} />
           <meta property="og:url" content={`${SITE_URL}${page.path}`} />
-          <meta property="og:image" content={`${SITE_URL}${SITE.shareImage.path}`} />
-          <meta property="og:image:type" content="image/png" />
-          <meta property="og:image:width" content={String(SITE.shareImage.width)} />
-          <meta property="og:image:height" content={String(SITE.shareImage.height)} />
-          <meta property="og:image:alt" content={SITE.shareImage.alt} />
+          <meta property="og:image" content={`${SITE_URL}${shareImage.path}`} />
+          <meta property="og:image:type" content={shareImage.mimeType ?? 'image/png'} />
+          <meta property="og:image:width" content={String(shareImage.width)} />
+          <meta property="og:image:height" content={String(shareImage.height)} />
+          <meta property="og:image:alt" content={shareImage.alt} />
         </>
       )}
       {structuredData && (

@@ -126,3 +126,32 @@
     transform: scale(1.02);
   }
 }
+
+/* Editorial pages share the studio's existing typefaces and thin rules. */
+@layer components {
+  .blog-shell {
+    @apply mx-auto max-w-[100rem] px-5 md:px-8;
+  }
+
+  .blog-rule {
+    @apply border-t border-brand-ink/25;
+  }
+
+  .blog-display {
+    @apply font-serif font-normal tracking-[-0.055em];
+    font-size: clamp(3rem, 8.5vw, 9rem);
+    line-height: 1.04;
+  }
+
+  .blog-prose {
+    @apply max-w-[42rem] space-y-5 text-lg leading-[1.7] md:text-xl;
+  }
+
+  .blog-prose p {
+    @apply m-0;
+  }
+
+  .blog-text-link {
+    @apply text-inherit underline underline-offset-4 hover:decoration-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-ink;
+  }
+}

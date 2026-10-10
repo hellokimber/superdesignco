@@ -1,11 +1,13 @@
 import { SITE, SITE_URL } from './site.js'
 
 export function structuredDataForPage(page, email) {
-  // The other routes are drafts, so only describe the published homepage.
-  if (page?.path !== '/') return null
+  // Only finished, indexable pages publish structured data.
+  if (!page?.indexable) return null
 
   const organizationId = `${SITE_URL}/#organization`
   const websiteId = `${SITE_URL}/#website`
+  const pageUrl = `${SITE_URL}${page.path}`
+  const articleId = `${pageUrl}#article`
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -28,16 +30,33 @@ export function structuredDataForPage(page, email) {
         publisher: { '@id': organizationId },
       },
       {
-        '@type': 'WebPage',
-        '@id': `${SITE_URL}/#webpage`,
+        '@type': page.path === '/blog/' ? 'CollectionPage' : 'WebPage',
+        '@id': `${pageUrl}#webpage`,
         name: page.title,
         description: page.description,
         dateModified: page.dateModified,
-        url: `${SITE_URL}/`,
+        url: pageUrl,
         inLanguage: 'en',
+        ...(page.article ? { mainEntity: { '@id': articleId } } : {}),
         isPartOf: { '@id': websiteId },
         about: { '@id': organizationId },
       },
+      ...(page.article ? [{
+        '@type': 'BlogPosting',
+        '@id': articleId,
+        headline: page.article.title,
+        description: page.description,
+        url: pageUrl,
+        image: `${SITE_URL}${page.article.shareImage.path}`,
+        datePublished: page.datePublished,
+        dateModified: page.dateModified,
+        inLanguage: 'en',
+        articleSection: page.article.category,
+        author: { '@type': 'Person', name: page.article.author },
+        publisher: { '@id': organizationId },
+        mainEntityOfPage: { '@id': `${pageUrl}#webpage` },
+        citation: page.article.sections.filter((section) => section.reference).map((section) => section.reference.href),
+      }] : []),
     ],
   }
 }

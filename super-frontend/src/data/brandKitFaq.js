@@ -36,7 +36,7 @@ export const BRAND_KIT_FAQ = [
   },
   {
     id: 'ai-imagery-types',
-    link: { href: '#ai-gallery-heading', label: 'Explore our AI imagery gallery' },
+    link: { href: '/blog/art-direction-before-image-generation/', label: 'Read our approach to AI art direction' },
     question: 'What type of AI imagery can you create?',
     answer: 'We provide AI art direction and image generation for brands, creating editorial and fashion imagery, AI product photography, portraits, lifestyle scenes, character design, and custom avatars.\n\nOur visual styles range from natural-light photography and realistic product imagery to surreal worlds, richly patterned environments, and stylized characters.\n\nEach image is art directed to feel distinctive and consistent with your brand, whether it is used across your website, ecommerce product pages, advertising campaigns, social media, or broader brand identity.',
   },
