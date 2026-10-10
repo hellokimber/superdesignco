@@ -96,6 +96,12 @@ for (const page of PAGES) {
           assert.ok(faq.includes(escapeHtml(paragraph)), 'complete FAQ answer paragraphs are available in HTML without JavaScript')
         }
       }
+      const contextualLinks = [...faq.matchAll(/<a href="(#[^"]+)"/g)]
+      assert.ok(contextualLinks.length >= 3, 'FAQ includes contextual section links')
+      for (const [, href] of contextualLinks) {
+        const targetId = href.slice(1)
+        assert.equal(body.split(`id="${targetId}"`).length - 1, 1, 'each section link has exactly one destination')
+      }
       for (const text of ['Stand out.', 'Branding for pre-launch', 'Base brand kit', 'Full brand kit', '1k USD', '5k USD']) {
         assert.ok(body.includes(text), `homepage contains ${text}`)
       }
