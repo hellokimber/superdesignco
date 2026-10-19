@@ -529,26 +529,24 @@ function OfferingCard({
 
   return (
     <div
-      className={`flex flex-col rounded-[2rem] border-[6px] border-solid border-black p-[1.5rem] md:px-[2.4rem] md:py-[1.8rem] ${
+      className={`grid grid-cols-1 rounded-[2rem] border-[6px] border-solid border-black p-[1.5rem] md:px-[2.4rem] md:py-[1.8rem] lg:grid-cols-[minmax(0,1fr)_auto] ${
         inverted ? 'bg-black text-white' : 'bg-transparent text-brand-ink'
       }`}
     >
-      <div className="flex items-start justify-between gap-4">
-        <h3
-          id={id}
-          className="m-0 font-sans text-[clamp(3.5rem,8vw,5rem)] font-bold leading-[1.08] tracking-tight"
-        >
-          {title}
-        </h3>
-        <a
-          href={inquireHref(inquireSubject)}
-          className="inline-flex h-14 shrink-0 items-center justify-center rounded-full bg-brand-lavender px-5 py-1 text-[clamp(1.125rem,1.2vw+0.7rem,1.25rem)] font-medium text-brand-ink no-underline transition-colors hover:bg-brand-iris hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-lavender md:px-6"
-        >
-          Inquire
-        </a>
-      </div>
+      <h3
+        id={id}
+        className="m-0 font-sans text-[clamp(3.5rem,8vw,5rem)] font-bold leading-[1.08] tracking-tight"
+      >
+        {title}
+      </h3>
+      <a
+        href={inquireHref(inquireSubject)}
+        className="order-last mt-8 inline-flex h-14 w-full items-center justify-center rounded-full bg-brand-lavender px-5 py-1 text-[clamp(1.125rem,1.2vw+0.7rem,1.25rem)] font-medium text-brand-ink no-underline transition-colors hover:bg-brand-iris hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-lavender lg:order-none lg:mt-0 lg:w-auto lg:self-start lg:justify-self-end lg:px-6"
+      >
+        Inquire
+      </a>
 
-      <div className="mt-[6.25rem] flex items-start gap-x-8 gap-y-3">
+      <div className="mt-10 flex flex-col items-start gap-3 lg:col-span-2 lg:mt-[6.25rem] lg:flex-row lg:gap-x-8">
         <p
           className={`m-0 shrink-0 whitespace-nowrap leading-[1.1375] ${
             inverted ? 'text-white/50' : 'text-brand-ink/50'
@@ -557,10 +555,10 @@ function OfferingCard({
           {priceKicker} {priceAmount}
         </p>
         <ul
-          className={`m-0 flex min-w-0 flex-1 list-none flex-wrap items-center p-0 leading-[1.1375] ${bodySize} ${
+          className={`m-0 flex min-w-0 w-full flex-1 list-none flex-col p-0 leading-[1.1375] lg:flex-row lg:flex-wrap lg:items-center ${bodySize} ${
             dotSeparators
-              ? 'justify-start gap-x-3 gap-y-2'
-              : 'justify-between gap-x-4 gap-y-1'
+              ? 'justify-start gap-y-2 lg:gap-x-3'
+              : 'justify-between gap-y-1 lg:gap-x-4'
           }`}
         >
           {inclusions.map((item, i) => (
@@ -571,7 +569,7 @@ function OfferingCard({
               {dotSeparators && i > 0 ? (
                 <span
                   aria-hidden
-                  className="inline-block h-[0.22em] w-[0.22em] shrink-0 rounded-full bg-brand-lavender"
+                  className="hidden h-[0.22em] w-[0.22em] shrink-0 rounded-full bg-brand-lavender lg:inline-block"
                 />
               ) : null}
               {item}
