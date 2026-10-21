@@ -16,6 +16,8 @@ import imgT16 from '../assets/imgs/SuperDesign_peaceofmind.webp'
 import imgT18 from '../assets/imgs/SuperDesign_DelftEditorial1.jpg'
 import imgT19 from '../assets/imgs/SuperDesign_DelftEditorial2.jpg'
 import imgT20 from '../assets/imgs/SuperDesign_charactersfront.jpg'
+import imgT21 from '../assets/imgs/SuperDesign_robot-flowers.webp'
+import imgT22 from '../assets/imgs/SuperDesign_emerald-girl.webp'
 
 /** `data-area` ids for figures. `t2` spans two columns top-left; `t20` spans two columns under the top-right pair. */
 export const HOME_GRID = [
@@ -28,11 +30,25 @@ export const HOME_GRID = [
   },
   // Mixed sequence to avoid long editorial-only runs below the hero.
   {
+    area: 't21',
+    src: imgT21,
+    alt: 'White robot with glowing eyes holding a purple flower among red and white wildflowers',
+    width: 1200,
+    height: 1600,
+  },
+  {
     area: 't1',
     src: imgT1,
     alt: 'Product still life with eyewear',
     width: 2064,
     height: 2752,
+  },
+  {
+    area: 't22',
+    src: imgT22,
+    alt: 'Close-up portrait of a freckled red-haired woman holding an emerald-green gem between her teeth',
+    width: 1600,
+    height: 897,
   },
   {
     area: 't12',
