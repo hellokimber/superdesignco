@@ -18,8 +18,9 @@ import imgT19 from '../assets/imgs/SuperDesign_DelftEditorial2.jpg'
 import imgT20 from '../assets/imgs/SuperDesign_charactersfront.jpg'
 import imgT21 from '../assets/imgs/SuperDesign_robot-flowers.webp'
 import imgT22 from '../assets/imgs/SuperDesign_emerald-girl.webp'
+import imgT23 from '../assets/imgs/SuperDesign_token-prada.webp'
 
-/** `data-area` ids for figures. `t2` spans two columns top-left; `t20` spans two columns under the top-right pair. */
+/** `columnSpan: 2` spans adjacent lanes on tablet and desktop. `data-area` ids for figures. `t2` spans two columns top-left; `t20` spans two columns under the top-right pair. */
 export const HOME_GRID = [
   {
     area: 't2',
@@ -63,6 +64,16 @@ export const HOME_GRID = [
     alt: 'Yellow motorcycle helmet with visor',
     width: 1600,
     height: 893,
+  },
+  {
+    area: 't23',
+    src: imgT23,
+    alt: 'Low-angle fashion portrait of a model with a mint-green shaggy Prada bag and matching sleeves against a blue sky',
+    width: 1456,
+    height: 816,
+    columnSpan: 2,
+    startColumn: 0,
+    precededBy: ['t22', 't3'],
   },
   {
     area: 't6',

@@ -104,7 +104,7 @@
     position: relative;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     .home-mosaic__figure--span-2 {
       /* Span across this lane and the next lane (plus the inter-lane gap). */
       width: calc(200% + 1rem);
