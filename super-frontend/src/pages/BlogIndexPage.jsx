@@ -1,5 +1,4 @@
 import { ARTICLES, formatArticleDate } from '../data/articles.js'
-import { BLOG_IMAGES } from '../data/blogImages.js'
 import BlogImage from '../components/BlogImage.jsx'
 
 export default function BlogIndexPage() {
@@ -10,11 +9,11 @@ export default function BlogIndexPage() {
         <span>Studio blog</span>
       </div>
       <header className="pb-12 pt-12 md:pb-20 md:pt-16">
-        <h1 className="blog-display m-0">Brand strategy<br />and AI imagery</h1>
+        <h1 className="blog-display m-0">Branding for<br />startup founders</h1>
         <div className="mt-8 grid gap-4 md:grid-cols-12 md:mt-12">
           <p className="m-0 text-sm tracking-[0.12em] md:col-span-4">The blog</p>
           <p className="m-0 max-w-xl font-serif text-xl leading-relaxed md:col-span-8 md:text-2xl">
-            How we choose a brand’s message, design its visual identity, and create AI imagery.
+            Practical guidance on positioning, brand kits, choosing design support, and creating imagery for your startup.
           </p>
         </div>
       </header>
@@ -25,14 +24,14 @@ export default function BlogIndexPage() {
             <time dateTime={article.datePublished}>{formatArticleDate(article.datePublished)}</time>
           </div>
           <a href={article.path} className="group block text-inherit no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-brand-ink">
-            <BlogImage image={BLOG_IMAGES.editorial} caption="AI editorial imagery from our gallery, with natural light, textured clothing, and a cobalt blue color palette." eager />
-            <div className="mt-8 grid gap-5 md:grid-cols-12">
+            {article.heroImage && <BlogImage image={article.heroImage} />}
+            <div className={`${article.heroImage ? 'mt-8 ' : ''}grid gap-5 md:grid-cols-12`}>
               <h2 className="m-0 max-w-3xl font-serif text-[clamp(2rem,4.5vw,4.5rem)] font-normal leading-[1.08] tracking-tight md:col-span-8 group-hover:underline group-hover:underline-offset-8">
                 {article.title}
               </h2>
               <div className="md:col-span-4 md:pt-2">
                 <p className="m-0 text-lg leading-relaxed">{article.excerpt}</p>
-                <p className="mt-5 mb-0 text-sm underline underline-offset-4">Read our approach to AI art direction <span aria-hidden="true">↗</span></p>
+                <p className="mt-5 mb-0 text-sm underline underline-offset-4">Read article <span aria-hidden="true">↗</span></p>
               </div>
             </div>
           </a>

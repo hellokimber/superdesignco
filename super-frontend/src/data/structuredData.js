@@ -55,7 +55,6 @@ export function structuredDataForPage(page, email) {
         author: { '@type': 'Person', name: page.article.author },
         publisher: { '@id': organizationId },
         mainEntityOfPage: { '@id': `${pageUrl}#webpage` },
-        citation: page.article.sections.filter((section) => section.reference).map((section) => section.reference.href),
       }] : []),
     ],
   }

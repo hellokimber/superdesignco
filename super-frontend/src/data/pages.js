@@ -29,9 +29,9 @@ export const PAGES = [
   {
     path: '/blog/',
     title: 'Blog | The Super Design Company',
-    description: 'Articles on brand strategy, visual design, and AI imagery. Learn how The Super Design Company plans brands and directs images.',
+    description: 'Practical branding articles for startup founders. Compare brand kits, agencies, studios, and AI tools, and learn how to explain and use your brand.',
     indexable: true,
-    dateModified: '2026-10-09',
+    dateModified: '2026-10-24',
   },
   ...ARTICLES.map((article) => ({
     path: article.path,

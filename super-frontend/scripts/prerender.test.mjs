@@ -7,6 +7,7 @@ import { PAGES, SITE_URL } from '../src/data/pages.js'
 import { SITE } from '../src/data/site.js'
 import { serializeStructuredData } from '../src/data/structuredData.js'
 import { BRAND_KIT_FAQ } from '../src/data/brandKitFaq.js'
+import { ARTICLES } from '../src/data/articles.js'
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url))
 const escapeHtml = (text) => text.replace(/[&<>"']/g, (character) => ({
@@ -121,13 +122,25 @@ for (const page of PAGES) {
         assert.equal(article.datePublished, page.datePublished)
         assert.equal(article.dateModified, page.dateModified)
         assert.equal(article.mainEntityOfPage['@id'], webpage['@id'])
+        for (const paragraph of page.article.introduction) assert.ok(body.includes(escapeHtml(paragraph)))
+        let expectedTables = 0
         for (const section of page.article.sections) {
-          for (const paragraph of section.paragraphs) assert.ok(body.includes(escapeHtml(paragraph)))
-          if (section.reference) {
-            assert.ok(body.includes(`href="${section.reference.href}"`), 'citations are visible crawlable links')
-            assert.ok(article.citation.includes(section.reference.href))
+          assert.ok(body.includes(`id="${section.id}"`))
+          for (const block of section.blocks) {
+            if (block.type === 'paragraph') {
+              assert.ok(body.includes(escapeHtml(block.text)), 'complete article prose is present without JavaScript')
+            } else if (block.type === 'table') {
+              expectedTables += 1
+              for (const header of block.headers) assert.ok(body.includes(`<th scope="col">${escapeHtml(header)}</th>`))
+              for (const row of block.rows) {
+                assert.ok(body.includes(`<th scope="row">${escapeHtml(row[0])}</th>`))
+                for (const cell of row.slice(1)) assert.ok(body.includes(`<td>${escapeHtml(cell)}</td>`))
+              }
+            }
           }
         }
+        assert.equal((body.match(/<table(?:\s|>)/g) ?? []).length, expectedTables)
+        assert.equal((body.match(/<caption(?:\s|>)/g) ?? []).length, expectedTables)
         assert.equal((body.match(/<h2(?:\s|>)/g) ?? []).length, page.article.sections.length)
         for (const fragment of ['ai-gallery-heading', 'services-heading']) assert.ok(body.includes(`href="/#${fragment}"`))
       }
@@ -176,4 +189,23 @@ test('JSON-LD serialization cannot close its script element', () => {
   const json = serializeStructuredData(data)
   assert.ok(!json.includes('<'))
   assert.deepEqual(JSON.parse(json), data)
+})
+
+
+test('blog lists exactly the five selected articles', async () => {
+  assert.equal(ARTICLES.length, 5)
+  assert.equal(new Set(ARTICLES.map((article) => article.slug)).size, 5)
+  const html = await readFile(join(dist, 'blog/index.html'), 'utf8')
+  assert.equal((html.match(/<article(?:\s|>)/g) ?? []).length, 5)
+  for (const article of ARTICLES) {
+    assert.ok(html.includes(`href="${article.path}"`))
+    assert.ok(html.includes(escapeHtml(article.title)))
+  }
+  for (const excluded of ['Invest in branding when you can name the job it must do', 'Art direction before image generation']) {
+    assert.ok(!html.includes(excluded), 'excluded articles are absent from the index')
+  }
+  const sitemap = await readFile(join(dist, 'sitemap.xml'), 'utf8')
+  assert.ok(!sitemap.includes('/art-direction-before-image-generation/'))
+  const redirects = await readFile(join(dist, '_redirects'), 'utf8')
+  assert.match(redirects, /art-direction-before-image-generation\/\s+\/blog\/choose-ai-brand-imagery\/\s+301/)
 })

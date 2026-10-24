@@ -11,7 +11,11 @@ Add-ons include landing pages, slide decks, product pages, social templates, dig
 - [Brand kits and services](https://superdesigncompany.com/): Current offerings, starting prices, brand examples, and contact links.
 
 - [Blog](https://superdesigncompany.com/blog/): Notes on brand strategy, visual identity, and AI art direction.
-- [Art direction before image generation](https://superdesigncompany.com/blog/art-direction-before-image-generation/): An introduction to the studio’s approach to AI art direction, with further reading.
+- [Explain your startup](https://superdesigncompany.com/blog/explain-your-startup/): Connect the message to the customer's current approach.
+- [Choose your brand package](https://superdesigncompany.com/blog/choose-your-brand-package/): Compare kit inclusions and launch requirements.
+- [Agency, studio, or AI agent](https://superdesigncompany.com/blog/branding-agency-studio-or-ai-agent/): Compare working models and responsibilities.
+- [Brand kit handoff](https://superdesigncompany.com/blog/brand-kit-handoff/): Compare formats and test a handoff in practice.
+- [Choose AI brand imagery](https://superdesigncompany.com/blog/choose-ai-brand-imagery/): Match the image method to purpose and accuracy.
 
 ## Contact
 

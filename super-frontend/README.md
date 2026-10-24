@@ -51,3 +51,9 @@ Verify a Netlify preview before merging changes to routing. Local Vite preview d
 `src/data/articles.js` holds the article text, dates, author, and supporting citations. The blog lives at `/blog/`; articles live at `/blog/:slug/`. Add a complete article to the registry to include its route in static HTML generation and the sitemap. Images are mapped in `src/data/blogImages.js` using the studio’s existing gallery assets.
 
 The initial article is “Art direction before image generation.” Its editorial layout uses the existing studio fonts, gallery imagery, and thin dividers. The page publishes BlogPosting metadata alongside its canonical URL and visible byline/date. Update publication and modification dates deliberately when content changes.
+
+## Blog articles
+
+`src/data/articles.js` contains the five founder articles and their metadata. Each article has introductory paragraphs and ordered section blocks. Paragraph and table blocks render in their original editorial order, including accessible table headings and horizontally scrollable tables on narrow screens. The blog index, article routes, sitemap, and sharing metadata use this same collection. Source research remains in the separate editorial notes, rather than in article bodies.
+
+The former art-direction article redirects to the replacement AI-imagery article. The first draft article about when to invest in branding is intentionally excluded.

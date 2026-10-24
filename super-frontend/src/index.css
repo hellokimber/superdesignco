@@ -151,6 +151,31 @@
     @apply m-0;
   }
 
+  .blog-table-scroll {
+    @apply max-w-full overflow-x-auto rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-ink;
+  }
+
+  .blog-table {
+    @apply w-full min-w-[40rem] border-collapse text-left text-sm leading-relaxed md:text-base;
+  }
+
+  .blog-table th,
+  .blog-table td {
+    @apply border-b border-brand-ink/20 px-3 py-4 align-top;
+  }
+
+  .blog-table th:first-child {
+    min-width: 8rem;
+  }
+
+  .blog-table thead th {
+    @apply border-t border-brand-ink/25 bg-brand-ink/5 font-medium;
+  }
+
+  .blog-table tbody th {
+    @apply font-medium;
+  }
+
   .blog-text-link {
     @apply text-inherit underline underline-offset-4 hover:decoration-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-ink;
   }
