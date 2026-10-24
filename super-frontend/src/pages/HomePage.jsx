@@ -50,6 +50,17 @@ function pinSpanTwo(cols, item, startCol, colWidth, gapPx) {
 }
 
 function packItem(cols, item, colWidth, gapPx) {
+  if (item.columnSpan === 2 && cols.length >= 2) {
+    let startCol = 0
+    for (let i = 1; i < cols.length - 1; i++) {
+      const height = Math.max(cols[i].height, cols[i + 1].height)
+      const bestHeight = Math.max(cols[startCol].height, cols[startCol + 1].height)
+      if (height < bestHeight) startCol = i
+    }
+    pinSpanTwo(cols, item, item.startColumn ?? startCol, colWidth, gapPx)
+    return
+  }
+
   let shortest = cols[0]
   for (let i = 1; i < cols.length; i++) {
     if (cols[i].height < shortest.height) shortest = cols[i]
@@ -104,18 +115,38 @@ function packMasonry(items, containerWidthPx, gapPx, colCount) {
     return i
   }
 
+  // Keep wide tiles on aligned pairs, with any curated lead-in images
+  // packed into those same two lanes before the spanning tile.
+  const packRemaining = (startIndex) => {
+    const remaining = rest.slice(startIndex)
+    const wide = remaining.filter((item) => item.columnSpan === 2)
+    const single = remaining.filter((item) => item.columnSpan !== 2)
+    const placed = new Set()
+    for (const item of wide) {
+      const startColumn = item.startColumn ?? 0
+      const pair = cols.slice(startColumn, startColumn + 2)
+      for (const area of item.precededBy ?? []) {
+        const leadIn = single.find((candidate) => candidate.area === area)
+        if (leadIn && !placed.has(area)) {
+          packItem(pair, leadIn, colWidth, gapPx)
+          placed.add(area)
+        }
+      }
+      packItem(cols, item, colWidth, gapPx)
+    }
+    for (const item of single) {
+      if (!placed.has(item.area)) packItem(cols, item, colWidth, gapPx)
+    }
+  }
+
   if (characters && n >= 4) {
-    let i = packUntilColsFilled([2, 3])
+    const i = packUntilColsFilled([2, 3])
     pinSpanTwo(cols, characters, 2, colWidth, gapPx)
-    for (; i < rest.length; i++) {
-      packItem(cols, rest[i], colWidth, gapPx)
-    }
+    packRemaining(i)
   } else if (characters && n === 2) {
-    let i = packUntilColsFilled([0, 1])
+    const i = packUntilColsFilled([0, 1])
     pinSpanTwo(cols, characters, 0, colWidth, gapPx)
-    for (; i < rest.length; i++) {
-      packItem(cols, rest[i], colWidth, gapPx)
-    }
+    packRemaining(i)
   } else {
     rest.forEach((item) => packItem(cols, item, colWidth, gapPx))
     if (characters) packItem(cols, characters, colWidth, gapPx)
